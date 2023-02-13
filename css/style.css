@@ -1,7 +1,12 @@
 .class1{
     border:solid;
     padding: 25px;
+    font-size: large;
     
+    
+}
+h1{
+    color: rgb(0, 0, 0);
 }
 #hierarchy{
     background-color: rgb(20, 106, 255);
