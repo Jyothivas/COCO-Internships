@@ -1,51 +1,84 @@
-.class1{
+.class1
+{
     border:solid;
     padding: 25px;
     font-size: large;
     
     
 }
-h1{
+
+h1
+{
     color: rgb(0, 0, 0);
 }
-#hierarchy{
+#hierarchy
+{
     background-color: rgb(20, 106, 255);
 }
-.class1:hover{
+.class1:hover
+{
    background-color: rgb(130, 238, 144);
 }
-.class2{
+.class2
+{
     border:solid;
     padding: 25px;
     margin: 30px;
 }
-.class2:hover{
+.class2:hover
+{
     background-color: red;
 }
-.class3{
+.class3
+{
     border:solid;
     padding: 25px;
 }
-.class3:hover{
+.class3:hover
+{
     background-color: blueviolet;
 }
 
-.class4{
+.class4
+{
     border:solid;
     padding: 25px;
 }
 
-.class4:hover{
+.class4:hover
+{
     background-color: blanchedalmond;
 }
 
-.btn{
+.btn
+{
    
     height: 50px;
     width: 100px;
     background-color: aqua;
     
 }
-.btn:hover{
+
+.btn:hover
+{
     background-color: yellow;
+}
+
+p.first::first-letter 
+{
+    color: #ff0000;
+    font-size: xx-large;
+}
+
+div ~ p 
+{
+    background-color: rgb(208, 208, 195);
+}
+
+@media only screen and (max-width: 600px)
+{
+    #hierarchy
+    {
+        background-color: rgb(61, 205, 63);
+    }
 }
