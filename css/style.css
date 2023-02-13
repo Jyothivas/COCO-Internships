@@ -1,0 +1,46 @@
+.class1{
+    border:solid;
+    padding: 25px;
+    
+}
+#hierarchy{
+    background-color: rgb(20, 106, 255);
+}
+.class1:hover{
+   background-color: rgb(130, 238, 144);
+}
+.class2{
+    border:solid;
+    padding: 25px;
+    margin: 30px;
+}
+.class2:hover{
+    background-color: red;
+}
+.class3{
+    border:solid;
+    padding: 25px;
+}
+.class3:hover{
+    background-color: blueviolet;
+}
+
+.class4{
+    border:solid;
+    padding: 25px;
+}
+
+.class4:hover{
+    background-color: blanchedalmond;
+}
+
+.btn{
+   
+    height: 50px;
+    width: 100px;
+    background-color: aqua;
+    
+}
+.btn:hover{
+    background-color: yellow;
+}
