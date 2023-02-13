@@ -1,0 +1,42 @@
+p::first-line {
+    color: #ff0000;
+    font-variant: small-caps;
+  }
+  h6::first-letter {
+    color: #00ff26;
+    font-size: xx-large;
+  }
+  p.intro::first-letter {
+    color: #785ff1;
+    font-size: 200%;
+  }  
+  h2::before {
+    content: url(smiley.gif);
+  }
+  h2::after {
+    content: url(smiley.gif);
+  }
+  ::marker { 
+    color: rgb(240, 9, 160);
+    font-size: 23px;
+  }
+  div.first {
+    opacity: 0.6;
+  }
+  div.background {
+    background-color: red;
+    border: 2px solid black;
+  }
+  
+  div.transbox {
+    margin: 30px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.6;
+  }
+  
+  div.transbox p {
+    margin: 5%;
+    font-weight: bold;
+    color: #000000;
+  }

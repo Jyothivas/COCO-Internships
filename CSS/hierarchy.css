@@ -1,0 +1,23 @@
+.demo{
+    color: rgb(0, 255, 42);
+    border: 1px solid red;
+    background-color: aqua;
+    font-size: large;
+    font-variant:small-caps;
+}
+.demo1 :hover{
+    font-variant: diagonal-fractions;
+    background-color: #f598b7;
+}
+ .demo1 :hover{
+    color: #fa0909;
+}
+#demo2{
+  color: blue;
+}
+h1{
+    font-family: sans-serif;
+}
+.demo1 :active{
+    color: black;
+}
