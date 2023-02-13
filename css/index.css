@@ -32,3 +32,20 @@
 .btn:hover{
     background-color: yellow;
 }
+
+
+
+/* pseudo element */
+
+.PsuedoElement{
+    border: solid;
+    margin: 25px;
+}
+.PsuedoElement::first-line{
+    color: red;
+}
+/* psudeo class */
+p:hover{
+    color: green;
+}
+
