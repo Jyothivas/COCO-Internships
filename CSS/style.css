@@ -1,0 +1,85 @@
+
+.d0{
+    padding: 20px;
+    display:flex
+    
+}
+.d1{
+    border: 1px solid black;
+    height: 60px;
+    width: 15rem;
+    margin-right: 20px;
+    background-color: green;
+    
+}
+.d1:hover{
+    background-color: yellow;
+    height: 25vh;
+}
+.d2{
+    border: 1px solid black;
+    height: 60px;
+    width: 15rem;
+    margin-right: 20px;
+    background-color: yellow;
+}
+.d3{
+    border: 1px solid black;
+    height: 60px;
+    width: 15rem;
+    background-color: blue;
+}
+
+/* combinator selector */
+div p{
+    background-color:  red !important;
+}
+
+div>p{
+    background-color: green;
+}
+
+div+p{
+    text-align: center;
+    font-size: 20px;
+}
+div~p{
+    font-family: cursive;
+    color: skyblue;
+}
+
+/* CSS pseudo class */
+
+a:link{
+    background-color: red;
+}
+a:visited{
+    /* //font-weight: 25px; */
+    background-color: green;
+}
+a:hover{
+    font-size: 25px;
+}
+a:active{
+    background-color: grey;
+}
+
+/* pseudo element selector */
+
+p::first-letter{
+    font-size: 25px;
+}
+::selection{
+    color: red;
+    background:yellow;
+}
+@media screen and (max-width:600px) {
+    .d0{
+        flex-direction: column;
+
+    } 
+     .d1 .d2 .d3{
+        width: 100vw;
+        margin-top: 20px;
+     }
+}
