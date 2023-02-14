@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p>Get the Location Access</p>
+        <button id="b1">Get_Location</button>
+        <script>
+            var x=document.getElementById("b1");
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+            else
+            {
+                b1.innerHTML="No location found";
+            }
+            function showPosition(position)
+            {
+                x="Latitude"+position.coords.latitude + "Longitude"+position.coords.longitude;
+                document.write(x);
+            }
+        </script>
+    </div>
+</body>
+</html>

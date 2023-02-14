@@ -1,0 +1,71 @@
+<!-- with use of canvas -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas{
+            border: 1px solid;
+        }
+        #canvas2{
+            border: 1px solid #d3d3d3;
+        }
+        #mycanvas3{
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" height="200px" width="200px">Canvas Image</canvas>
+    <script>
+        var x=document.getElementById('canvas');
+        var x1=x.getContext("2d");
+        x1.moveTo(2,2);
+        x1.lineTo(200,200);
+        x1.stroke();
+    </script>
+
+    <canvas id="canvas2" height="200" width="200">Canvas2 text</canvas>
+        <script>
+            var a=document.getElementById('canvas2');
+            var a1=a.getContext("2d");
+            a1.font="30px Arial";
+            a1.fillText("Hello World",10,50);
+        </script>
+    <canvas id="myCanvas" width="200" height="100" style="border:1px solid #d3d3d3;">
+            Your browser does not support the HTML canvas tag.</canvas>
+            
+        <script>
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            ctx.font = "30px Arial";
+            ctx.fillText("Tejas",10,50);
+        </script>
+
+        <canvas id="minecanvas" width="200" height="200"></canvas>
+        <script>
+            var z=document.getElementById("minecanvas");
+            var ztx=z.getContext("2d");
+            ztx.font="30px bold";
+            ztx.fillText("Hey Here",50,100)
+        </script>
+
+        <canvas id="mycanvas3" width="200" height="200">
+        </canvas>
+        <script>
+            var y=document.getElementById("mycanvas3");
+            var yz=y.getContext("2d");
+
+            var grad=yz.createLinearGradient(0,0,200,0);
+            grad.addColorStop( 0,"red");
+            grad.addColorStop( 1,"white");
+
+            yz.fillStyle=grad;
+            yz.fillRect(10,10,150,80);
+        </script>
+    
+</body>
+</html>
