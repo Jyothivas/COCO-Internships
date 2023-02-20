@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h5>Show or hide html element</h5>
+    <img src="../images/play-store.png" id="img1">
+    <button onclick="myFunction3()">Hide the Image</button>
+    <button onclick="myFunction4()">Show the image</button>
+    <script>
+        function myFunction3()
+        {
+            document.getElementById('img1').style.display='none';
+        }
+        function myFunction4()
+        {
+            document.getElementById('img1').src='../images/play-store.png';
+        }
+    </script>
+</body>
+</html>

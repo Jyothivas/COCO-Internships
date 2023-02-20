@@ -1,0 +1,21 @@
+<!-- Javaceript can change html content -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="p1">Javaceript is web based language ,</p>
+    <button onclick="myfunction()">Click to Add text</button>
+    <script>
+        function myfunction()
+        {
+            document.getElementById('p1').innerHTML=" which makes web page to behave as dynamically.";
+        }
+    </script>
+</body>
+</html>
