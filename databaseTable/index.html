@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  
+<body style="text-align:center;">
+    <h1>Login</h1>
+   
+   
+   <input  placeholder="Name" type="text" id="name" value="">
+ 
+    <button type="button" onclick="myFunction()">Try it</button>
+   <h1>name</h1>
+        <p id="name_display"></p>
+  
+  
+      
+    <script>
+
+    let arr=[];
+    
+    let curretnSize = arr.length;
+
+    function add(value){
+     arr[curretnSize] = value;
+     curretnSize++;
+    }
+
+    //function
+    function myFunction() {
+        var x = document.getElementById("name").value;
+        
+        add(x)
+        
+        document.getElementById("name_display").innerHTML =`<ol>${gettingAllValues(arr)}</ol>`;
+        
+        //clearing input field after adding values
+        document.getElementById('name').value = ''
+    }
+
+        //getting all values
+    function gettingAllValues(val){
+
+        let items=[];
+
+        for(let i=0; i<val.length; i++){
+            items +=`<li>${val[i]}</li>`;
+        }
+        return items;
+
+    } 
+    </script>
+</body>
+  
+</html>
