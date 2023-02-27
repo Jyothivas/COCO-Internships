@@ -24,6 +24,8 @@ var arr=[];
 var formData={};
 var index;
 var i;
+var arr1=[];
+
 
 function onFormSubmit(event)
 {
@@ -118,25 +120,35 @@ function onDelete(event)
   var index= readIndex();
   //console.log(index);
 
-  //deleteRecord(index);
-  //console.log(arr);
+  deleteRecord(index);
+  console.log(arr);
   //resetForm();
-
+  
 
 }
 
 function deleteRecord(index)
 {
-
-  for(i=index;i<arr.length;i++)
+  var j=0;
+  for(i=0;i<arr.length;i++)
   {
-    if(i!=arr.length-1)
+    if(i<index)
     {
-      console.log(i);
-      arr[i]=arr[i+1];
+      arr1[j]= arr[i];
+      j++;
     }
-    
-    
+
+    else if(i==index)
+    {
+      continue;
+    }
+
+    else
+    {
+      arr1[j]= arr[i];
+      j++;
+    }
   }
-  //arr[arr.length].removeItem();
+  arr=arr1;
+  return arr;
 }
