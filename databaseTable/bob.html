@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>sing up</h1>
+   
+   
+    <input  placeholder="Name" type="text" id="name">
+    <input  placeholder="age" type="text" id="age" >
+  
+     <button type="button" onclick="adduser()">submit</button>
+    <h1>name</h1>
+    <p id="name_display"></p>
+   
+   
+
+<script>
+
+let users={
+    userName:null,
+    userAge:null,
+}
+
+
+// addd function
+
+
+
+
+//////
+
+
+function adduser(){
+
+    let arr=[];
+    
+    let curretnSize = arr.length;
+
+    function add(value){
+     arr[curretnSize] = value;
+     curretnSize++;
+    }
+    let name = document.getElementById('name').value;
+    let age = document.getElementById('age').value;
+
+    users.userName= name;
+    users.userAge= age;
+    
+
+   add(users);
+
+   document.getElementById("name_display").innerHTML =`<ol>${gettingAllValues(users)}</ol>`;
+        
+        //clearing input field after adding values
+    // document.getElementById('name').value = ''
+
+    users={};
+    name='';
+    age='';
+}
+
+
+ //getting all values
+ function gettingAllValues(val){
+
+let items=[];
+
+for(let i=0; i<val.length; i++){
+    items +=`<li>${val[i]}</li>`;
+}
+return items;
+
+} 
+</script>
+</body>
+</html>

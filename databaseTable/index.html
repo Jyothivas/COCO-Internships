@@ -6,10 +6,11 @@
    
    
    <input  placeholder="Name" type="text" id="name" value="">
+   <input  placeholder="Email" type="text" id="email" value="">
  
     <button type="button" onclick="myFunction()">Try it</button>
    <h1>name</h1>
-        <p id="name_display"></p>
+    <p id="name_display"></p>
   
   
       
@@ -24,9 +25,10 @@
      curretnSize++;
     }
 
-    //function
+    //function for displaying
     function myFunction() {
         var x = document.getElementById("name").value;
+        var y = document.getElementById("email").value;
         
         add(x)
         
@@ -36,7 +38,9 @@
         document.getElementById('name').value = ''
     }
 
-        //getting all values
+
+
+    //getting all values
     function gettingAllValues(val){
 
         let items=[];
