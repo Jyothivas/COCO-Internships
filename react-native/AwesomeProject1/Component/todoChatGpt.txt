@@ -1,0 +1,182 @@
+npx react-native init TodoList
+
+
+
+npm install @react-navigation/native @react-navigation/stack react-native-gesture-handler react-native-reanimated react-native-safe-area-context react-native-screens
+
+
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
+
+const TodoListScreen = () => {
+  const [tasks, setTasks] = useState([]);
+
+  const renderItem = ({ item }) => (
+    <View style={styles.task}>
+      <Text style={styles.taskTitle}>{item.title}</Text>
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={tasks}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  task: {
+    backgroundColor: '#f2f2f2',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+  },
+  taskTitle: {
+    fontSize: 18,
+  },
+});
+
+export default TodoListScreen;
+
+
+
+
+
+
+-----------> here all chat gpt code start <--------------
+
+    /*
+    Sure, I can help you create a simple to-do list app using React Native. Here are the steps:
+
+Step 1: Create a new React Native project
+
+To create a new React Native project, open your terminal and run the following command:
+
+java
+Copy code
+npx react-native init TodoList
+This will create a new React Native project named TodoList.
+
+Step 2: Install necessary dependencies
+
+Now, you need to install some dependencies for the project. Open your terminal, navigate to the project directory, and run the following command:
+
+java
+Copy code
+npm install @react-navigation/native @react-navigation/stack react-native-gesture-handler react-native-reanimated react-native-safe-area-context react-native-screens
+This command installs the react-navigation library and its dependencies that we'll use to create a navigation stack in our app.
+
+Step 3: Create the screens
+
+Create two screens, one for the to-do list and one for adding new tasks. Create a new folder named screens in the root of your project directory. Inside the screens folder, create two files named TodoListScreen.js and AddTaskScreen.js.
+
+Here's the code for TodoListScreen.js:
+
+javascript
+Copy code
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
+
+const TodoListScreen = () => {
+  const [tasks, setTasks] = useState([]);
+
+  const renderItem = ({ item }) => (
+    <View style={styles.task}>
+      <Text style={styles.taskTitle}>{item.title}</Text>
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={tasks}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  task: {
+    backgroundColor: '#f2f2f2',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+  },
+  taskTitle: {
+    fontSize: 18,
+  },
+});
+
+export default TodoListScreen;
+And here's the code for AddTaskScreen.js:
+
+javascript
+Copy code
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+
+const AddTaskScreen = ({ navigation }) => {
+  const [taskTitle, setTaskTitle] = useState('');
+
+  const handleSaveTask = () => {
+    navigation.goBack();
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.label}>Task Title:</Text>
+      <TextInput
+        style={styles.input}
+        value={taskTitle}
+        onChangeText={setTaskTitle}
+      />
+      <TouchableOpacity style={styles.button} onPress={handleSaveTask}>
+        <Text style={styles.buttonText}>Save Task</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 5,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#2196f3',
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18
+    */
