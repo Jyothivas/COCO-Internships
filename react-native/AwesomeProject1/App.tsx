@@ -1,71 +1,43 @@
 import React, {useState, useCallback} from 'react';
-import {Alert, Modal,Button, StyleSheet,TextInput, Text, Pressable, View} from 'react-native';
-
+import {Alert, Modal,Button,ScrollView, StyleSheet,TextInput, Text, Pressable, View} from 'react-native';
+import App1 from './Component/App1';
+import TextInputExample from './Component/TextInputExample';
+import modal from './Component/modal';
 
 
 const App = () => {
-  const [modalVisible, setModalVisible] = useState(false);
 
-  const [name, setName] = useState('');
-  const [items, setItems] = useState<string[]>([]);
-
-  const addHandler = useCallback(() => {
-    setItems([name, ...items]);
-    setName('');
-    setModalVisible(!modalVisible)
-  }, [name, items]);
 
   return (
-    <View>
+    <ScrollView>
       <View style={styles.navbar}>
         
       <View>
-      <Text style={styles.NameTitle}>Names : {items.length}</Text>
+      <Text testID='nameText' style={styles.NameTitle}>Names : {items.length}</Text>
       </View>
       <View style={styles.addButton}>
       <Pressable
+      testID='addButtonofModal'
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Add</Text>
+        <Text style={styles.textStyle}>+</Text>
       </Pressable>
       </View>
       </View>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Login</Text>
-            {/* input field */}
-            <TextInput
-            style={[styles.inputBorder]}
-        value={name}
-        data-testID='add'
-        placeholder="Enter Name"
-        onChangeText={text => setName(text)}
-      />
-      <Button title='add' onPress={addHandler} />
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Cancel</Text>
-            </Pressable>
-            
-          </View>
-        </View>
-      </Modal>
+      
      
       <Text style={styles.Names}>
       {items.map((item,index) => (
-        <Text key={index}>{'\n'}{item}</Text>
+       <View>
+         <Text key={index} >{'\n'}Name  : {item.name}</Text>
+         <Text key={index} >{'\n'}Email : {item.email}</Text>
+       </View>
+       
+        
       ))}
       </Text>
-    </View>
+    </ScrollView>
+    
   );
 };
 
