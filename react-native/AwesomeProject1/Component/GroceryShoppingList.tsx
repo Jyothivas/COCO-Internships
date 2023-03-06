@@ -13,6 +13,7 @@ function GroceryShoppingList() {
   return (
     <>
       <TextInput
+      testID="text"
         value={groceryItem}
         placeholder="Enter grocery item"
         onChangeText={text => setGroceryItem(text)}

@@ -1,22 +1,35 @@
-
 import React, {useState, useCallback} from 'react';
 import {Alert, Modal,Button, StyleSheet,TextInput, Text, Pressable, View} from 'react-native';
+
+
 
 const App = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const [groceryItem, setGroceryItem] = useState('');
+  const [name, setName] = useState('');
   const [items, setItems] = useState<string[]>([]);
 
   const addHandler = useCallback(() => {
-    setItems([groceryItem, ...items]);
-    setGroceryItem('');
+    setItems([name, ...items]);
+    setName('');
     setModalVisible(!modalVisible)
-  }, [groceryItem, items]);
+  }, [name, items]);
 
   return (
     <View>
-      <Text>Names {items.length}</Text>
+      <View style={styles.navbar}>
+        
+      <View>
+      <Text style={styles.NameTitle}>Names : {items.length}</Text>
+      </View>
+      <View style={styles.addButton}>
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}>
+        <Text style={styles.textStyle}>Add</Text>
+      </Pressable>
+      </View>
+      </View>
       <Modal
         animationType="fade"
         transparent={true}
@@ -31,9 +44,10 @@ const App = () => {
             {/* input field */}
             <TextInput
             style={[styles.inputBorder]}
-        value={groceryItem}
+        value={name}
+        data-testID='add'
         placeholder="Enter Name"
-        onChangeText={text => setGroceryItem(text)}
+        onChangeText={text => setName(text)}
       />
       <Button title='add' onPress={addHandler} />
             <Pressable
@@ -45,11 +59,7 @@ const App = () => {
           </View>
         </View>
       </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Add</Text>
-      </Pressable>
+     
       <Text style={styles.Names}>
       {items.map((item,index) => (
         <Text key={index}>{'\n'}{item}</Text>
@@ -123,7 +133,17 @@ const styles = StyleSheet.create({
    textAlign:'center',
     fontSize:50,
     
-   
+  },
+  navbar:{
+    flexDirection: 'row',
+    alignContent: 'space-between',
+    alignItems:'center' ,
+    padding:10,
+
+  },
+  addButton:{
+      padding:15,
+      
   },
 });
 
