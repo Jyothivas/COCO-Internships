@@ -16,12 +16,12 @@ const FormList: FC<FormListType> = (props) => {
   return (
     <View>
 
-      <FlatList
+      <FlatList testID='flatlist'
         data={names}
         renderItem={({ item, index }) => {
           return (
 
-            <View style={styles.box}>
+            <View testID='card-details' style={styles.box}>
               <Text style={styles.count}>{index + 1}.</Text>
               <View style={{ padding: 10 }}>
                 <Text style={styles.name}>{item.name}

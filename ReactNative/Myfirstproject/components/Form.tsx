@@ -33,15 +33,15 @@ export const Form: FC<FormType> = (props) => {
 
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.border}>
+    <ScrollView testID='userdetails' style={styles.container}>
+      <View testID='name' style={styles.border}>
         <View style={{ marginBottom: 60 }}>
-          <Text textNameID='name' style={styles.containerText}>Name</Text>
-          <TextInput textInputID='namePlaceholder' value={name} onChangeText={n => setName(n)} style={{ borderWidth: 1, borderRadius: 7, paddingLeft: 10, marginTop: 5 }} placeholder='Enter your Name' />
+          <Text testID='nametext' style={styles.containerText}>Name</Text>
+          <TextInput value={name} onChangeText={n => setName(n)} style={{ borderWidth: 1, borderRadius: 7, paddingLeft: 10, marginTop: 5 }} placeholder='Enter your name' />
         </View>
         <View style={{ marginBottom: 60, }}>
-          <Text textEmailID='email' style={styles.containerText}>Email address</Text>
-          <TextInput textInputEmailID='emailPlaceholder' value={email} onChangeText={n => SetEmail(n)} style={styles.emailtext} placeholder='email@gmail.com' />
+          <Text testID='emailtext' style={styles.containerText}>Email address</Text>
+          <TextInput value={email} onChangeText={n => SetEmail(n)} style={styles.emailtext} placeholder='Enter your email' />
         </View>
         <View style={styles.fixToText}>
           <TouchableOpacity style={styles.button}
