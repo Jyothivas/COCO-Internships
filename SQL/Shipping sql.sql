@@ -5,3 +5,5 @@ VALUES (10309,'Mumbai','India');
  INSERT INTO Shipping (OrderID,City, Country)
 VALUES (10311, 'Dubai','UAE');
  SELECT * FROM Orders;
+
+SELECT DISTINCT city FROM Shipping;

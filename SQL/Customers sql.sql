@@ -23,6 +23,11 @@ SELECT * FROM Customers;
 DELETE FROM Customers;
 SET SQL_SAFE_UPDATES = 0;
 ALTER TABLE Customers MODIFY CustomerID INT not null PRIMARY KEY AUTO_INCREMENT;
+desc Customers;
+-- SQL statement to select all the customers from the country "Mexico", in the
+-- "Customers" table
+SELECT * FROM Customers WHERE Country='Mexico';
+
 
 
 
