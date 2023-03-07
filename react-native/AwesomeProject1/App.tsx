@@ -55,6 +55,7 @@ const App=()=>{
        </Stack.Screen>
 
        <Stack.Screen name='Login'
+       
         options={{
           title:'Login_Screen'
           ,

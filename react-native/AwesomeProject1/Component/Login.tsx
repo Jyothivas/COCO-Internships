@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useCallback} from 'react';
 import { View, Text,Button,TextInput, ScrollView ,StyleSheet} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,7 +18,7 @@ export const Login =(props:ChildProps)=> {
     const [email , setEmail] = useState('');
     const [item , setItem] = useState<User[]>([]);
     
-    const addingUser = () => {
+    const addingUser = useCallback(() => {
         if(!name || !email){
             return
         }
@@ -27,11 +27,12 @@ export const Login =(props:ChildProps)=> {
         setName('');
         setEmail('');
         HomeNavigate();
-    }
+    },[name, email , item]
+    )
     const HomeNavigate = ()=> ( navigation.navigate('Home'))
-    
+
     return (
-      <View style={style.mainView}>
+      <View  style={style.mainView}>
         <Text style={style.loginStyle}>Login Screen</Text>
         <TextInput style={style.inputFieldStyle} placeholder='Enter name' onChangeText={n=>setName(n)} />
         <TextInput  style={style.inputFieldStyle} placeholder='Enter Email' onChangeText={n=>setEmail(n)} />
