@@ -28,9 +28,8 @@ export const Login =(props:ChildProps)=> {
         setEmail('');
         HomeNavigate();
     }
-    const HomeNavigate = ()=> {
-       return navigation.navigate('Home');
-    }
+    const HomeNavigate = ()=> ( navigation.navigate('Home'))
+    
     return (
       <View style={style.mainView}>
         <Text style={style.loginStyle}>Login Screen</Text>

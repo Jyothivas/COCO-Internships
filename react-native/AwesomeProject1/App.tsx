@@ -36,7 +36,7 @@ const App=()=>{
        }}>
         <Stack.Screen name='Home'
         options={({ navigation }) => ({
-          title: 'Names',
+          title: `Names : ${Users.length}`,
           headerStyle: {
             backgroundColor: '#273469',
           },
