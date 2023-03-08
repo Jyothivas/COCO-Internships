@@ -50,16 +50,17 @@ const App=()=>{
             />
           ),})}
        >
-         {() => <Home UserData={Users} />}
+         {(navigation) => <Home navigation={navigation} UserData={Users} />}
        </Stack.Screen>
 
        <Stack.Screen name='Login'
        
-        options={{
-          title:'Login_Screen'
-          ,
-         }}>
-          {() => <Login AddUser={handleAddUser} />}
+       options={{
+        title:'Login_Screen'
+        ,
+       }}>
+      
+          {(navigation) => <Login navigation={navigation}  AddUser={handleAddUser} />}
          </Stack.Screen>
        
       </Stack.Navigator>

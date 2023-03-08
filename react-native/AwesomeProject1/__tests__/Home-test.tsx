@@ -6,11 +6,15 @@ import { Home } from '../Component/Home';
 
 describe('Home SCREENS ',()=>{
 
+    const navigation ={navigate:()=>{}}
+    jest.spyOn(navigation,'navigate')
+    
+
     const addHandler = jest.fn()
 
     test('Home Screen is Present.', () => {
 
-        const {  getByTestId } = render(<Home UserData={addHandler} />);
+        const {  getByTestId } = render(<Home navigation={navigation} UserData={addHandler} />);
 
             const HomeScreen  =getByTestId('homeScreen');
 
@@ -19,7 +23,11 @@ describe('Home SCREENS ',()=>{
     });
     test('Checking FlatList is Present.', () => {
 
-        const {  getByTestId } = render(<Home UserData={addHandler} />);
+        const navigation ={navigate:()=>{}}
+        jest.spyOn(navigation,'navigate')
+        
+
+        const {  getByTestId } = render(<Home navigation={navigation} UserData={addHandler} />);
 
             const FlatList  =getByTestId('flatList');
 

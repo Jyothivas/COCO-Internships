@@ -11,8 +11,9 @@ describe('LOGIN SCREENS ',()=>{
 
     test('Input Field and add Button working correctly ', () => {
 
-       
-        const { getByPlaceholderText, getByText} = render(<Login AddUser={addHandler} />);
+       const navigation ={navigate:()=>{}}
+      
+        const { getByPlaceholderText, getByText} = render(<Login navigation={navigation} AddUser={addHandler} />);
 
         const nameInput = getByPlaceholderText('Enter name');
         const emailInput = getByPlaceholderText('Enter Email');
@@ -23,6 +24,27 @@ describe('LOGIN SCREENS ',()=>{
         fireEvent.press(button)
 
         expect(addHandler).toHaveBeenCalledWith('test','test@gmail.com')
+
+       
+    });
+    test('after clicking to add button, screen navigated to Home screen ', () => {
+
+       const navigation ={navigate:()=>{}}
+       jest.spyOn(navigation,'navigate')
+       
+        const { getByPlaceholderText, getByText} = render(<Login navigation={navigation} AddUser={addHandler} />);
+
+        const nameInput = getByPlaceholderText('Enter name');
+        const emailInput = getByPlaceholderText('Enter Email');
+        const button = getByText('login');
+
+        fireEvent.changeText(nameInput, 'test');
+        fireEvent.changeText(emailInput, 'test@gmail.com');
+        fireEvent.press(button)
+
+        expect(addHandler).toHaveBeenCalledWith('test','test@gmail.com')
+
+        expect(navigation.navigate).toHaveBeenCalledWith('Home')
 
     });
 

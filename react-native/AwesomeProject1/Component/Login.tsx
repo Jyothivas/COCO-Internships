@@ -1,11 +1,11 @@
 import React,{useState} from 'react';
 import { View, Text,Button,TextInput, ScrollView ,StyleSheet} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { Home } from './Home';
 
 
-type ChildProps ={
-    AddUser: (name: string, email: string) => void;
+
+type ChildProps={
+    navigation:any,
+    AddUser: (name: string, email: string)=>void;
       
 }
 
@@ -21,10 +21,10 @@ export const Login =(props:ChildProps)=> {
         }
        
         props.AddUser(name, email);
+        props.navigation.navigate('Home')
+
         setName('');
         setEmail('');
-        // HomeNavigate();
-        // navigation.navigate('Home')
     };
     
     return (

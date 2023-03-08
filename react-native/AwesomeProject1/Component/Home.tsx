@@ -3,6 +3,7 @@ import { View, Text,Button,TextInput, ScrollView,FlatList, StyleSheet } from 're
 import { SwipeListView } from 'react-native-swipe-list-view';
 
 type ParentProps = {
+    navigation:any;
     UserData:any;
     
 }
