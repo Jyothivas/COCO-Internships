@@ -15,16 +15,19 @@ const FormList: FC<FormListType> = (props) => {
   const [names] = useState<user[]>(props.route.params.item)
   return (
     <View>
-
-      <FlatList testID='flatlist'
+     <FlatList testID='flatlist'
         data={names}
         renderItem={({ item, index }) => {
           return (
-
-            <View testID='card-details' style={styles.box}>
-              <Text style={styles.count}>{index + 1}.</Text>
-              <View style={{ padding: 10 }}>
-                <Text style={styles.name}>{item.name}
+              <View testID='card-details' style={styles.box}>
+              <Text 
+                 style={styles.count}>
+                 {index + 1}.
+              </Text>
+              <View style={{padding: 10}}>
+                <Text 
+                  style={styles.name}>
+                  {item.name}
                 </Text>
                 <Text
                   style={styles.name}
@@ -32,36 +35,33 @@ const FormList: FC<FormListType> = (props) => {
               </View>
 
             </View>
-
-
-
-          )
+         )
         }}
         ListHeaderComponent={
           <View style={styles.container}>
             <View style={styles.view}>
-              <Text style={styles.text}>Names</Text>
-
-
+              <Text 
+                 style={styles.text}>
+                 Names
+              </Text>
               <Text
-                style={styles.text1}>{names.length}</Text>
+                style={styles.text1}>
+                {names.length}
+              </Text>
             </View>
             <TouchableOpacity
               onPress={() => {
-                props.navigation.goBack('')
+              props.navigation.goBack('')
               }}>
               <Image
-                source={require("../Images/add.png")} style={{ tintColor: 'blue', width: 50, height: 50, resizeMode: 'contain', }}
+                source={require("../Images/add.png")} 
+                style={styles.img}
               />
             </TouchableOpacity>
           </View>
         }
       />
-
-
-
-
-    </View>
+   </View>
 
   );
 }
@@ -114,5 +114,11 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  img:{
+    tintColor: 'blue', 
+    width: 50,
+    height: 50, 
+    resizeMode: 'contain',
   }
 })

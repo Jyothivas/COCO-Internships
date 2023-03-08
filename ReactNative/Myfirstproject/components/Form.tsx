@@ -13,10 +13,7 @@ interface user {
 export const Form: FC<FormType> = (props) => {
   const [name, setName] = useState('')
   const [email, SetEmail] = useState('')
-
-
   const [item, setItem] = useState<user[]>([])
-
   const addData = useCallback(() => {
     let copy = [...item, { name, email }]
     setItem(copy)
@@ -44,14 +41,17 @@ export const Form: FC<FormType> = (props) => {
           <TextInput value={email} onChangeText={n => SetEmail(n)} style={styles.emailtext} placeholder='Enter your email' />
         </View>
         <View style={styles.fixToText}>
-          <TouchableOpacity style={styles.button}
+          <TouchableOpacity
+            style={styles.button}
             onPress={() => {
-              props.navigation.navigate('FormList', { item: item })
+            props.navigation.navigate('FormList', { item: item })
             }}
           >
             <Text>Cancel</Text>
           </TouchableOpacity>
-          <Pressable onPress={addData} style={styles.button1}>
+          <Pressable
+            onPress={addData}
+            style={styles.button1}>
             <Text>Add</Text>
           </Pressable>
         </View>
@@ -99,10 +99,10 @@ const styles = StyleSheet.create({
     width: '35%',
     borderRadius: 7,
   },
-  emailtext:{
-    borderWidth: 1, 
-    borderRadius: 7, 
-    paddingLeft: 10, 
+  emailtext: {
+    borderWidth: 1,
+    borderRadius: 7,
+    paddingLeft: 10,
     marginTop: 5
   }
 });

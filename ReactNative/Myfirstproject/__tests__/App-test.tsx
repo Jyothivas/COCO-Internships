@@ -13,12 +13,12 @@ it('renders correctly', () => {
 
 describe('App Component', () => {
   it('renders Form component', () => {
-    const { getByTestId } = render(<Form/>);
+    const { getByTestId } = render(<Form navigation={undefined}/>);
     const form = getByTestId('userdetails');
     expect(form).toBeDefined();
   });
   it('renders FormList component', () => {
-    const { getByTestId } = render(<FormList />);
+    const { getByTestId } = render(<FormList navigation={undefined} route={undefined} />);
     const formlist = getByTestId('card-details');
     expect(formlist).toBeDefined();
   });
