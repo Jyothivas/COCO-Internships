@@ -1,28 +1,31 @@
 import React from "react";
 import { fireEvent, render } from '@testing-library/react-native';
-import { Form } from "../components/Form";
+import Form from "../components/Form";
 import renderer from 'react-test-renderer';
 
+
 describe('Form Component', () => {
+    const handleAddUser = jest.fn();
+
     it('Form component is defined', () => {
         expect(Form).toBeDefined();
     })
     it('renders correctly', () => {
-        renderer.create(<Form />);
+        renderer.create(<Form AddUser={handleAddUser} />);
     });
     it('Form component renders correctly', () => {
-        const { getByTestId, getByText, getByPlaceholderText } = render(<Form />)
+        const { getByTestId, getByText, getByPlaceholderText } = render(<Form AddUser={handleAddUser} />)
 
-        const component = getByTestId('name');
+        const component = getByTestId('user-form');
         expect(component).toBeDefined();
 
-        const nameText = getByTestId('nametext');
+        const nameText = getByTestId('name-test');
         expect(nameText).toBeDefined();
 
         const nameInput = getByPlaceholderText('Enter your name');
         expect(nameInput).toBeDefined();
 
-        const emailText = getByTestId('nametext');
+        const emailText = getByTestId('name-test');
         expect(emailText).toBeDefined();
 
         const emailInput = getByPlaceholderText('Enter your email');
@@ -33,23 +36,23 @@ describe('Form Component', () => {
 
         const cancelButton = getByText('Cancel');
         expect(cancelButton).toBeDefined();
+
     });
 
-    it('adds items in a list', () => {
-        const { getByPlaceholderText, getByText, getByTestId } = render(<Form />);
-        
+    it('add user when the Add button is pressed', () => {
+
+        const { getByPlaceholderText, getByText } = render(<Form AddUser={handleAddUser} />);
+
         const nameInput = getByPlaceholderText('Enter your name');
         const emailInput = getByPlaceholderText('Enter your email');
         const addButton = getByText('Add');
-        const flatList = getByTestId('flatlist');
-    
-        fireEvent.changeText(nameInput, 'amruta');
-        fireEvent.changeText(emailInput, 'amruta@gmail.com');
+
+        fireEvent.changeText(nameInput, 'Amruta');
+        fireEvent.changeText(emailInput, 'amruta@example.com');
         fireEvent.press(addButton);
-    
-        expect(getByText('amruta')).toBeDefined();
-        expect(getByText('amruta@gmail.com')).toBeDefined();
-        expect(flatList.props.data[0].name).toContain('amruta');
-        expect(flatList.props.data[0].email).toContain('amruta@gmail.com');
-      });
+
+        expect(handleAddUser).toHaveBeenCalledWith('Amruta', 'amruta@example.com')
+
+    });
+
 })
