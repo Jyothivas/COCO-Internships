@@ -6,15 +6,17 @@ import renderer from 'react-test-renderer';
 
 describe('Form Component', () => {
     const handleAddUser = jest.fn();
+    const changeIndex=jest.fn();
 
     it('Form component is defined', () => {
         expect(Form).toBeDefined();
     })
     it('renders correctly', () => {
-        renderer.create(<Form AddUser={handleAddUser} />);
+        renderer.create(<Form changeIndex={changeIndex} AddUser={handleAddUser} />);
+        
     });
     it('Form component renders correctly', () => {
-        const { getByTestId, getByText, getByPlaceholderText } = render(<Form AddUser={handleAddUser} />)
+        const { getByTestId, getByText, getByPlaceholderText } = render(<Form changeIndex={changeIndex} AddUser={handleAddUser} />)
 
         const component = getByTestId('user-form');
         expect(component).toBeDefined();
@@ -41,7 +43,7 @@ describe('Form Component', () => {
 
     it('add user when the Add button is pressed', () => {
 
-        const { getByPlaceholderText, getByText } = render(<Form AddUser={handleAddUser} />);
+        const { getByPlaceholderText, getByText } = render(<Form changeIndex={changeIndex} AddUser={handleAddUser} />);
 
         const nameInput = getByPlaceholderText('Enter your name');
         const emailInput = getByPlaceholderText('Enter your email');

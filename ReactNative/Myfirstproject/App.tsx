@@ -1,39 +1,49 @@
 import React, { useState } from 'react';
-import { ScrollView } from 'react-native';
-import UserData from './components/UserData';
-import UserForm from './components/UserForm';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import FormList from './components/FormList';
+import Form from './components/Form';
+import {View} from 'react-native'
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+interface Appprops{
+  index:number,
 
+}
 interface User {
   name: string,
   email: string
 }
-const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
 
-const App = () => {
+const App = (props:Appprops) => {
+  const [activeIndex,setActivendex]=useState(props.index || 0) //when activeIndex=0 then form will show and when activeIndex=1 then formList will show
 
   const [Users, setUser] = useState<User[]>([]);
 
   const handleAddUser = (name: string, email: string) => {
     setUser([...Users, { name, email }]);
   };
-
+ const changeIndex=(Index:number)=>{
+  setActivendex(Index)
+ }
+ 
   return (
-    <>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="User Data">
-              {(props) => <UserData {...props} onUserData={Users} />}
-            </Stack.Screen>
-            <Stack.Screen name="User Form">
-              {(props) => <UserForm {...props} onAddUser={handleAddUser} />}
-            </Stack.Screen>
-          </Stack.Navigator>
-        </NavigationContainer>
+    <View testID='mainview'>
+        {
+          activeIndex==0 && <Form
+          AddUser={handleAddUser}
+          changeIndex={changeIndex}
+          />
 
-    </>
+
+        }
+        {
+          activeIndex==1 && <FormList
+          UsersName={Users}
+          changeIndex={changeIndex}
+          />
+        }
+    </View>
   );
 }
 

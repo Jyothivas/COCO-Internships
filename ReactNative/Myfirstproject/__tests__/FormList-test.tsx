@@ -9,8 +9,9 @@ describe('FormList Component', () => {
         { name: 'Alice', email: 'alice@example.com' },
     ];
 
-    const gotoFormScreen = jest.fn();
-    const props = { formlistdata: users, AddUser: gotoFormScreen };
+    const changeIndex = jest.fn();
+    
+    const props = { UsersName: users, changeIndex: changeIndex};
 
     it('FormList component is defined', () => {
         expect(FormList).toBeDefined();
@@ -22,23 +23,23 @@ describe('FormList Component', () => {
 
 
     it('FormList component render correctly', () => {
-        const { getByTestId, getByText } = render(<FormList {...props} />);
+        const { getByTestId, } = render(<FormList {...props} />);
         
-        const formList = getByTestId('table');
+        const formList = getByTestId('card');
         expect(formList).toBeDefined();
 
-        const navigateFormScreenButton = getByText('Create User');
+        const navigateFormScreenButton = getByTestId('Create User');
         expect(navigateFormScreenButton).toBeDefined();
 
     });
 
     it('should navigate to the user form screen when the "Create User" button is pressed', () => {
-        const { getByText } = render(<FormList {...props} />);
-        const createNewUserButton = getByText('Create User');
+        const { getByTestId } = render(<FormList {...props} />);
+        const createNewUserButton = getByTestId('Create User');
     
         fireEvent.press(createNewUserButton);
     
-          expect(gotoFormScreen).toHaveBeenCalled();
+          expect(changeIndex).toHaveBeenCalled();
         });
 
 });

@@ -3,6 +3,7 @@ import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 interface ChildProps {
     AddUser: (name: string, email: string) => void;
+    changeIndex:(Index:number)=> void
 }
 
 const Form = (props: ChildProps) => {
@@ -16,6 +17,7 @@ const Form = (props: ChildProps) => {
         props.AddUser(name, email);
         setName('');
         setEmail('');
+        props.changeIndex(1)
     }
     return (
         <View testID='user-form' style={style.container}>
@@ -23,18 +25,18 @@ const Form = (props: ChildProps) => {
             <TextInput
                 style={style.input}
                 placeholder='Enter your name'
-                onChangeText={name => setName(name)}
+                onChangeText={name_ => setName(name_)}
                 value={name}
             />
             <Text testID='email-test' style={style.text}>Email</Text>
             <TextInput
                 style={style.input}
                 placeholder='Enter your email'
-                onChangeText={email => setEmail(email)}
+                onChangeText={email_ => setEmail(email_)}
                 value={email}
             />
             <View style={style.btn}>
-                <Button color={'grey'} title='Cancel' />
+                <Button color={'grey'} title='Cancel'  onPress={()=>{props.changeIndex(1)}}/>
                 <Button title='Add' onPress={addingUser} />
             </View>
         </View>
