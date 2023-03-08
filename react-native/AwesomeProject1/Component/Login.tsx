@@ -1,43 +1,39 @@
-import React,{useState, useCallback} from 'react';
+import React,{useState} from 'react';
 import { View, Text,Button,TextInput, ScrollView ,StyleSheet} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Home } from './Home';
 
-interface User {
-    name: string,
-    email: string
-}
 
-interface ChildProps {
-    onAddUser: (name: string, email: string) => void;
+type ChildProps ={
+    AddUser: (name: string, email: string) => void;
+      
 }
 
 export const Login =(props:ChildProps)=> {
-    const navigation=useNavigation();
+    // const navigation=useNavigation();
 
     const [name , setName] = useState('');
     const [email , setEmail] = useState('');
-    const [item , setItem] = useState<User[]>([]);
     
-    const addingUser = useCallback(() => {
+    const addingUser = () => {
         if(!name || !email){
             return
         }
-        setItem([...item, { name, email }]);
-        props.onAddUser(name, email);
+       
+        props.AddUser(name, email);
         setName('');
         setEmail('');
-        HomeNavigate();
-    },[name, email , item]
-    )
-    const HomeNavigate = ()=> ( navigation.navigate('Home'))
-
+        // HomeNavigate();
+        // navigation.navigate('Home')
+    };
+    
     return (
-      <View  style={style.mainView}>
+      <View  testID='loginScreen' style={style.mainView}>
         <Text style={style.loginStyle}>Login Screen</Text>
-        <TextInput style={style.inputFieldStyle} placeholder='Enter name' onChangeText={n=>setName(n)} />
-        <TextInput  style={style.inputFieldStyle} placeholder='Enter Email' onChangeText={n=>setEmail(n)} />
+        <TextInput  style={style.inputFieldStyle} placeholder='Enter name' onChangeText={n=>setName(n)} />
+        <TextInput style={style.inputFieldStyle} placeholder='Enter Email' onChangeText={n=>setEmail(n)} />
      
-        <Button title='login' onPress={addingUser} />
+        <Button testID='LoginButton' title='login' onPress={addingUser} />
       </View>
     );
   } 

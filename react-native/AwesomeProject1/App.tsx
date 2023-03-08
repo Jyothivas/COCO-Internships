@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { View, Text,Button, ScrollView,StyleSheet } from 'react-native';
-import { NavigationContainer, UNSTABLE_usePreventRemove } from '@react-navigation/native';
+import { NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home } from './Component/Home';
 import { Login } from './Component/Login';
@@ -48,10 +48,9 @@ const App=()=>{
               navigation.navigate('Login')}
               title="+"
             />
-          ),
-        })}
+          ),})}
        >
-         {() => <Home onUserData={Users} />}
+         {() => <Home UserData={Users} />}
        </Stack.Screen>
 
        <Stack.Screen name='Login'
@@ -60,7 +59,7 @@ const App=()=>{
           title:'Login_Screen'
           ,
          }}>
-          {() => <Login onAddUser={handleAddUser} />}
+          {() => <Login AddUser={handleAddUser} />}
          </Stack.Screen>
        
       </Stack.Navigator>
