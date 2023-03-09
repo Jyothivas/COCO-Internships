@@ -16,7 +16,8 @@ function GroceryShoppingList() {
       testID="text"
         value={groceryItem}
         placeholder="Enter grocery item"
-        onChangeText={text => setGroceryItem(text)}
+        onChangeText={e => setGroceryItem(e)}
+        //(text)=>setGrocery(text)
       />
       <Button
         title="Add the item to list"

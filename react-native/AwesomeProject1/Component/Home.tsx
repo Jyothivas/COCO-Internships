@@ -1,20 +1,16 @@
-import React,{useState} from 'react';
-import { View, Text,Button,TextInput, ScrollView,FlatList, StyleSheet } from 'react-native';
-import { SwipeListView } from 'react-native-swipe-list-view';
+import React from 'react';
+import { View, Text,FlatList, } from 'react-native';
 
 type ParentProps = {
     navigation:any;
     UserData:any;
-    
 }
-
 
 export const Home =(props:ParentProps)=> {
 
     return (
 
         <View testID='homeScreen'>
-       
         <FlatList testID='flatList' 
                       data={props.UserData}
                       renderItem={({item, index}) =>

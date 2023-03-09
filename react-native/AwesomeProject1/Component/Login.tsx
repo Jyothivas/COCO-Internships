@@ -1,6 +1,5 @@
 import React,{useState} from 'react';
-import { View, Text,Button,TextInput, ScrollView ,StyleSheet} from 'react-native';
-
+import { View, Text,Button,TextInput,StyleSheet} from 'react-native';
 
 
 type ChildProps={
@@ -10,7 +9,7 @@ type ChildProps={
 }
 
 export const Login =(props:ChildProps)=> {
-    // const navigation=useNavigation();
+    
 
     const [name , setName] = useState('');
     const [email , setEmail] = useState('');
@@ -19,14 +18,13 @@ export const Login =(props:ChildProps)=> {
         if(!name || !email){
             return
         }
+       props.AddUser(name, email);
+       setName('');
+       setEmail('');
+       props.navigation.navigate('Home')
        
-        props.AddUser(name, email);
-        props.navigation.navigate('Home')
-
-        setName('');
-        setEmail('');
     };
-    
+     
     return (
       <View  testID='loginScreen' style={style.mainView}>
         <Text style={style.loginStyle}>Login Screen</Text>

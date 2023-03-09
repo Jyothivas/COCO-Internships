@@ -1,17 +1,18 @@
 import React,{useState} from 'react';
-import { View, Text,Button, ScrollView,StyleSheet } from 'react-native';
+import { Button} from 'react-native';
 import { NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home } from './Component/Home';
 import { Login } from './Component/Login';
+import GroceryShoppingList from './Component/GroceryShoppingList';
 
 
-interface User {
+type User ={
   name: string,
-  email: string
+  email: string,
 }
-const Stack = createNativeStackNavigator();
 
+const Stack = createNativeStackNavigator();
 
 const App=()=>{
  
@@ -35,7 +36,7 @@ const App=()=>{
         }
        }}>
         <Stack.Screen name='Home'
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           title: `Names : ${Users.length}`,
           headerStyle: {
             backgroundColor: '#273469',
@@ -60,10 +61,11 @@ const App=()=>{
         ,
        }}>
       
-          {(navigation) => <Login navigation={navigation}  AddUser={handleAddUser} />}
+          {(props) => <Login {...props}  AddUser={handleAddUser} />}
          </Stack.Screen>
        
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 }

@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import { cleanup, render,screen, fireEvent } from "@testing-library/react-native";
+import {  render} from "@testing-library/react-native";
 import { Home } from '../Component/Home';
 
 
@@ -12,7 +12,7 @@ describe('Home SCREENS ',()=>{
 
     const addHandler = jest.fn()
 
-    test('Home Screen is Present.', () => {
+    test('Home Screen is rendered correctly', () => {
 
         const {  getByTestId } = render(<Home navigation={navigation} UserData={addHandler} />);
 
@@ -33,6 +33,7 @@ describe('Home SCREENS ',()=>{
 
             expect(FlatList).toBeDefined();
     });
+   
     
 
 })
