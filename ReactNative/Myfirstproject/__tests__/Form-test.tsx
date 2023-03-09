@@ -1,20 +1,17 @@
-import React from "react";
+import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
-import Form from "../components/Form";
-import renderer from 'react-test-renderer';
+import Form from '../components/Form';
 
 
 describe('Form Component', () => {
+
     const handleAddUser = jest.fn();
-    const changeIndex=jest.fn();
+    const changeIndex = jest.fn();
 
     it('Form component is defined', () => {
         expect(Form).toBeDefined();
-    })
-    it('renders correctly', () => {
-        renderer.create(<Form changeIndex={changeIndex} AddUser={handleAddUser} />);
-        
     });
+
     it('Form component renders correctly', () => {
         const { getByTestId, getByText, getByPlaceholderText } = render(<Form changeIndex={changeIndex} AddUser={handleAddUser} />)
 
@@ -41,7 +38,23 @@ describe('Form Component', () => {
 
     });
 
-    it('add user when the Add button is pressed', () => {
+    it('when data is not filled and Add button is pressed', () => {
+
+        const { getByPlaceholderText, getByText } = render(<Form changeIndex={changeIndex} AddUser={handleAddUser} />);
+
+        const nameInput = getByPlaceholderText('Enter your name');
+        const emailInput = getByPlaceholderText('Enter your email');
+        const addButton = getByText('Add');
+
+        fireEvent.changeText(nameInput, '');
+        fireEvent.changeText(emailInput, '');
+        fireEvent.press(addButton);
+
+        expect(handleAddUser).not.toBeCalled();
+
+    });
+
+    it('add users when the Add button is pressed', () => {
 
         const { getByPlaceholderText, getByText } = render(<Form changeIndex={changeIndex} AddUser={handleAddUser} />);
 
@@ -53,8 +66,7 @@ describe('Form Component', () => {
         fireEvent.changeText(emailInput, 'amruta@example.com');
         fireEvent.press(addButton);
 
-        expect(handleAddUser).toHaveBeenCalledWith('Amruta', 'amruta@example.com')
+        expect(handleAddUser).toHaveBeenCalledWith('Amruta', 'amruta@example.com');
 
     });
-
-})
+});

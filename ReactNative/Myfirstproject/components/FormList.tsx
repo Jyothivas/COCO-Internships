@@ -1,5 +1,5 @@
-import React, { useState, FC } from 'react'
-import { FlatList, View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import React, { useState, FC } from 'react';
+import { FlatList, View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 interface user {
     name: string,
     email: string,
@@ -8,20 +8,18 @@ interface user {
 interface FormListType {
     UsersName: user[],
     changeIndex: (Index: number) => void
-
-
 }
 const FormList: FC<FormListType> = (props) => {
     const [names] = useState<user[]>(props.UsersName)
     return (
-        <View testID='formlist'>
+        <View testID="formlist">
 
-            <FlatList testID='flatlist'
+            <FlatList testID="flatlist"
                 data={names}
                 renderItem={({ item, index }) => {
                     return (
 
-                        <View testID='card' style={styles.box}>
+                        <View testID="card" style={styles.box}>
                             <Text style={styles.count}>{index + 1}.</Text>
                             <View style={{ padding: 10 }}>
                                 <Text style={styles.name}>{item.name}
@@ -32,41 +30,31 @@ const FormList: FC<FormListType> = (props) => {
                             </View>
 
                         </View>
-
-
-
-                    )
+                    );
                 }}
                 ListHeaderComponent={
                     <View style={styles.container}>
                         <View style={styles.view}>
                             <Text style={styles.text}>Names</Text>
-
-
-                            <Text
-                                style={styles.text1}>{names.length}</Text>
+                            <Text style={styles.text1}>{names.length}</Text>
                         </View>
-                        <TouchableOpacity testID='Create User'
+                        <TouchableOpacity testID="Create User"
                             onPress={() => {
-                                props.changeIndex(0)
+                                props.changeIndex(0);
                             }}>
                             <Image
-                                source={require("../Images/add.png")} style={{ tintColor: 'blue', width: 50, height: 50, resizeMode: 'contain', }}
+                                source={require('../Images/add.png')} style={{ tintColor: 'blue', width: 50, height: 50, resizeMode: 'contain', }}
                             />
                         </TouchableOpacity>
                     </View>
                 }
             />
-
-
-
-
         </View>
 
     );
-}
+};
 
-export default FormList
+export default FormList;
 
 const styles = StyleSheet.create({
     container: {
@@ -81,7 +69,7 @@ const styles = StyleSheet.create({
     view: {
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     text: {
         color: 'black',
@@ -93,7 +81,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'blue',
         borderRadius: 30,
         padding: 10,
-        marginLeft: '5%'
+        marginLeft: '5%',
     },
     box: {
         shadowColor: '#000',
@@ -103,16 +91,16 @@ const styles = StyleSheet.create({
         paddingLeft: '5%',
         borderRadius: 7,
         elevation: 10,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
 
     },
     count: {
         fontSize: 20,
         fontWeight: 'bold',
-        paddingRight: 20
+        paddingRight: 20,
     },
     name: {
         fontSize: 20,
         fontWeight: 'bold',
-    }
-})
+    },
+});

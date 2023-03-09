@@ -1,7 +1,6 @@
-import React from "react";
+import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
-import renderer from 'react-test-renderer';
-import FormList from "../components/FormList";
+import FormList from '../components/FormList';
 
 describe('FormList Component', () => {
 
@@ -10,21 +9,16 @@ describe('FormList Component', () => {
     ];
 
     const changeIndex = jest.fn();
-    
-    const props = { UsersName: users, changeIndex: changeIndex};
+
+    const props = { UsersName: users, changeIndex: changeIndex };
 
     it('FormList component is defined', () => {
         expect(FormList).toBeDefined();
     });
 
-    it('renders correctly', () => {
-        renderer.create(<FormList {...props} />)
-    });
-
-
     it('FormList component render correctly', () => {
-        const { getByTestId, } = render(<FormList {...props} />);
-        
+        const { getByTestId } = render(<FormList {...props} />);
+
         const formList = getByTestId('card');
         expect(formList).toBeDefined();
 
@@ -35,11 +29,12 @@ describe('FormList Component', () => {
 
     it('should navigate to the user form screen when the "Create User" button is pressed', () => {
         const { getByTestId } = render(<FormList {...props} />);
+
         const createNewUserButton = getByTestId('Create User');
-    
         fireEvent.press(createNewUserButton);
-    
-          expect(changeIndex).toHaveBeenCalled();
-        });
+
+        expect(changeIndex).toHaveBeenCalled();
+    });
+
 
 });

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import FormList from './components/FormList';
 import Form from './components/Form';
-import { View } from 'react-native'
+import { View } from 'react-native';
 
-interface Appprops {  //this is for testcase active index change krke we can test
-
+interface Appprops {  //this is for testcase active index changes then we can test it easily
   index: number,
-
 }
 interface User {
   name: string,
@@ -14,7 +12,7 @@ interface User {
 }
 
 const App = (props: Appprops) => {
-  const [activeIndex, setActivendex] = useState(props.index || 0) //when activeIndex=0 then form will show and when activeIndex=1 then formList will show
+  const [activeIndex, setActiveIndex] = useState(props.index || 0);//when activeindex 0 form wil show andwhen activeindex 1 then formlist will show
 
   const [Users, setUser] = useState<User[]>([]);
 
@@ -22,18 +20,16 @@ const App = (props: Appprops) => {
     setUser([...Users, { name, email }]);
   };
   const changeIndex = (Index: number) => {
-    setActivendex(Index)
-  }
+    setActiveIndex(Index);
+  };
 
   return (
-    <View testID='mainview' style={{flex:1}}>
+    <View testID='mainview' style={{ flex: 1 }}>
       {
         activeIndex == 0 && <Form
           AddUser={handleAddUser}
           changeIndex={changeIndex}
         />
-
-
       }
       {
         activeIndex == 1 && <FormList
@@ -43,6 +39,5 @@ const App = (props: Appprops) => {
       }
     </View>
   );
-}
-
+};
 export default App;
