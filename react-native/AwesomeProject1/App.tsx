@@ -4,7 +4,6 @@ import { NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home } from './Component/Home';
 import { Login } from './Component/Login';
-import GroceryShoppingList from './Component/GroceryShoppingList';
 
 
 type User ={
