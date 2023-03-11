@@ -22,12 +22,9 @@ const List = () => {
     // }, [])
     return (
 
-        <View  style={{ flex: 1 }}>
+        <View  style={{ flex: 1 ,alignItems:'center'}}>
 
-            <Image style={{ height: 50, width: 100 }} testID='i3' source={{
-                uri: `https://cdn.uatr.view.com.au/images/listing/5000-w/pics/307/14441307-1-3536325.jpg`
-            }} />
-
+            
             <FlatList testID='f1'
                 data={
                     getData
@@ -36,18 +33,18 @@ const List = () => {
                     return (
                         <View>
                             <Text>HeroImageURL</Text>
-                            <Image testID='i1' style={{ height: 100, width: 100 }} source={{
+                            <Image testID='i1' style={{ height: 200, width: 250 , borderRadius:20}} source={{
                                 uri: `https://cdn.uatr.view.com.au/images/listing/slug/1000-min/${item.heroImageUrl.split('/')[2]}`
                             }}
                             />
 
-                            <Text style={{ fontSize: 15 }}>AgentPhotoImage</Text>
+                            <Text style={{ fontSize: 20 }}>AgentPhotoImage</Text>
                             {
                                 item.agents.map((agentItem: any, index: number) => {  //traverse inside index
                                     return (
                                         <Image key={'agentPhotoImage' + index}
                                             testID="i4"
-                                            style={{ height: 100, width: 150 }}
+                                            style={{ height: 200, width: 250 , borderRadius:20 }}
                                             source={{
                                                 uri: `https://cdn.uatr.view.com.au/images/listing/55-w/${agentItem.agentPhotoFileName}`
                                             }}
