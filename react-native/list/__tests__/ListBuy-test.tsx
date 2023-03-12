@@ -1,5 +1,6 @@
 import ListBuy from '../Component/ListBuy'
 import { render } from '@testing-library/react-native'
+import JsonData from '../listings-buy-data.json';
 
 describe("ListBuy Component", () => {
 
@@ -16,6 +17,15 @@ describe("ListBuy Component", () => {
 
     const FlatList = getByTestId('flatList')
     expect(FlatList).toBeDefined();
+  })
+
+  test('Checking JsonData not to bt NULL', () => {
+
+    const JSONdata = JsonData;
+
+    expect(JSONdata).not.toBeNull()
+
+
   })
 
   test('Agent image Rendred Correctly', async () => {
