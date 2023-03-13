@@ -17,7 +17,7 @@ const App: FC<movidataprops> = (props) => {
   return (
     <View style={{ flex: 1 }}>
       <FlatList
-        data={movidata.slice(0, 30)}
+        data={movidata}
         ListEmptyComponent={<Text>No data available</Text>}
 
         renderItem={({ item, index }) => {
@@ -81,7 +81,7 @@ const App: FC<movidataprops> = (props) => {
 
                           />
                         </View>
-                      )
+                      );
                     })
                   }
                 </View>
@@ -96,13 +96,13 @@ const App: FC<movidataprops> = (props) => {
               >
                 {
 
-                  item.images.map(() => {
+                  item.images.map((activeitem: any, imageindex: number) => {
                     return (
                       <View style={{
-                        width: activeIndex == index ? 15 : 8,
-                        height: activeIndex == index ? 10 : 8,
-                        borderRadius: activeIndex == index ? 5 : 4,
-                        backgroundColor: activeIndex == index ? 'green' : 'gray',
+                        width: activeIndex == imageindex ? 16 : 8,
+                        height: activeIndex == imageindex ? 10 : 8,
+                        borderRadius: activeIndex == imageindex ? 5 : 4,
+                        backgroundColor: activeIndex == imageindex ? 'red' : 'gray',
                         marginLeft: 5,
                         marginTop: 8,
                       }}
