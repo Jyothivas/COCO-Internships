@@ -22,8 +22,15 @@ describe('FormList Component', () => {
         const formList = getByTestId('card');
         expect(formList).toBeDefined();
 
+        const nameText = getByTestId('flatlistname');
+        expect(nameText).toBeDefined();
+
+        const emailText = getByTestId('flatlistemail');
+        expect(emailText).toBeDefined();
+
         const navigateFormScreenButton = getByTestId('Create User');
         expect(navigateFormScreenButton).toBeDefined();
+
 
     });
 

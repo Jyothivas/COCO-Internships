@@ -22,9 +22,10 @@ const FormList: FC<FormListType> = (props) => {
                         <View testID="card" style={styles.box}>
                             <Text style={styles.count}>{index + 1}.</Text>
                             <View style={{ padding: 10 }}>
-                                <Text style={styles.name}>{item.name}
+                                <Text  testID="flatlistname" style={styles.name}>{item.name}
                                 </Text>
                                 <Text
+                                testID="flatlistemail"
                                     style={styles.name}
                                 >{item.email}</Text>
                             </View>

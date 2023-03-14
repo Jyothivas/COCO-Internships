@@ -38,7 +38,7 @@ describe('Form Component', () => {
 
     });
 
-    it('when data is not filled and Add button is pressed', () => {
+    it('when data is not filled and Add button is pressed then it doesnt add data in a list', () => {
 
         const { getByPlaceholderText, getByText } = render(<Form changeIndex={changeIndex} AddUser={handleAddUser} />);
 
