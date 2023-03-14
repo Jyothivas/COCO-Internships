@@ -7,7 +7,7 @@ describe('App Component', () => {
         expect(App).toBeDefined();
     });
 
-    it('should show form without formlist', () => {
+    it('should show userform without userlist ', () => {
         const page = render(<App index={0} />);
         page.getByTestId('mainview');
         expect(page.queryAllByTestId('user-form').length).toEqual(1);
@@ -15,7 +15,7 @@ describe('App Component', () => {
 
     });
 
-    it('show formlist without form', () => {
+    it('show userlist without userform', () => {
         const page = render(<App index={1} />);
         page.getByTestId('mainview');
         expect(page.queryAllByTestId('user-form').length).toEqual(0);

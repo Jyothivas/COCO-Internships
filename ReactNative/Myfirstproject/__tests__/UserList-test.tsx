@@ -1,8 +1,8 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
-import FormList from '../components/FormList';
+import UserList from '../components/UserList';
 
-describe('FormList Component', () => {
+describe('UserList Component', () => {
 
     const users = [
         { name: 'Alice', email: 'alice@example.com' },
@@ -12,12 +12,12 @@ describe('FormList Component', () => {
 
     const props = { UsersName: users, changeIndex: changeIndex };
 
-    it('FormList component is defined', () => {
-        expect(FormList).toBeDefined();
+    it('UserList component is defined', () => {
+        expect(UserList).toBeDefined();
     });
 
-    it('FormList component render correctly', () => {
-        const { getByTestId } = render(<FormList {...props} />);
+    it('UserList component render correctly', () => {
+        const { getByTestId } = render(<UserList {...props} />);
 
         const formList = getByTestId('card');
         expect(formList).toBeDefined();
@@ -35,7 +35,7 @@ describe('FormList Component', () => {
     });
 
     it('should navigate to the user form screen when the "Create User" button is pressed', () => {
-        const { getByTestId } = render(<FormList {...props} />);
+        const { getByTestId } = render(<UserList {...props} />);
 
         const createNewUserButton = getByTestId('Create User');
         fireEvent.press(createNewUserButton);

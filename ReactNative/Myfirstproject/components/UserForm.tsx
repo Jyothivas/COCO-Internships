@@ -6,7 +6,7 @@ interface ChildProps {
     changeIndex: (Index: number) => void
 }
 
-const Form = (props: ChildProps) => {
+const UserForm = (props: ChildProps) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
@@ -53,7 +53,7 @@ const Form = (props: ChildProps) => {
         </View>
     );
 };
-export default Form;
+export default UserForm;
 
 const style = StyleSheet.create({
     container: {

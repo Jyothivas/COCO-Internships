@@ -1,19 +1,19 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
-import Form from '../components/Form';
+import UserForm from '../components/UserForm';
 
 
-describe('Form Component', () => {
+describe('UserForm Component', () => {
 
     const handleAddUser = jest.fn();
     const changeIndex = jest.fn();
 
-    it('Form component is defined', () => {
-        expect(Form).toBeDefined();
+    it('UserForm component is defined', () => {
+        expect(UserForm).toBeDefined();
     });
 
-    it('Form component renders correctly', () => {
-        const { getByTestId, getByText, getByPlaceholderText } = render(<Form changeIndex={changeIndex} AddUser={handleAddUser} />)
+    it('UserForm component renders correctly', () => {
+        const { getByTestId, getByText, getByPlaceholderText } = render(<UserForm changeIndex={changeIndex} AddUser={handleAddUser} />)
 
         const component = getByTestId('user-form');
         expect(component).toBeDefined();
@@ -38,9 +38,9 @@ describe('Form Component', () => {
 
     });
 
-    it('when data is not filled and Add button is pressed then it doesnt add data in a list', () => {
+    it('given data is not filled, when Add button is pressed, then it doesnt add data in the list', () => {
 
-        const { getByPlaceholderText, getByText } = render(<Form changeIndex={changeIndex} AddUser={handleAddUser} />);
+        const { getByPlaceholderText, getByText } = render(<UserForm changeIndex={changeIndex} AddUser={handleAddUser} />);
 
         const nameInput = getByPlaceholderText('Enter your name');
         const emailInput = getByPlaceholderText('Enter your email');
@@ -56,7 +56,7 @@ describe('Form Component', () => {
 
     it('add users when the Add button is pressed', () => {
 
-        const { getByPlaceholderText, getByText } = render(<Form changeIndex={changeIndex} AddUser={handleAddUser} />);
+        const { getByPlaceholderText, getByText } = render(<UserForm changeIndex={changeIndex} AddUser={handleAddUser} />);
 
         const nameInput = getByPlaceholderText('Enter your name');
         const emailInput = getByPlaceholderText('Enter your email');

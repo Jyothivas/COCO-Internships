@@ -9,7 +9,7 @@ interface FormListType {
     UsersName: user[],
     changeIndex: (Index: number) => void
 }
-const FormList: FC<FormListType> = (props) => {
+const UserList: FC<FormListType> = (props) => {
     const [names] = useState<user[]>(props.UsersName)
     return (
         <View testID="formlist">
@@ -55,7 +55,7 @@ const FormList: FC<FormListType> = (props) => {
     );
 };
 
-export default FormList;
+export default UserList;
 
 const styles = StyleSheet.create({
     container: {
