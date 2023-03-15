@@ -1,127 +1,21 @@
-import React, { useState, FC } from 'react';
-import { FlatList, Text, View, Image, ScrollView } from 'react-native';
-import Jsondata from './Assests/listings-buy-data.json';
-import { Dimensions } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './src/Home';
+import ImageView from './src/ImageView';
 
-interface movidataprops {
-  movidata: any
-}
-const width = Dimensions.get('window').width;
+const Stack = createNativeStackNavigator();
 
-const App: FC<movidataprops> = (props) => {
-
-
-  const [movidata] = useState(props.movidata || Jsondata.data.listings.data);
-  const [activeIndex, setActiveIndex] = useState(0);
+const App = () => {
 
   return (
-    <View style={{ flex: 1 }}>
-      <FlatList
-        data={movidata}
-        ListEmptyComponent={<Text>No data available</Text>}
-
-        renderItem={({ item, index }) => {
-
-          return (
-            <View style={{ width: '90%', alignSelf: 'center' }}>
-              <Text style={{ fontSize: 15 }} testID="hero-image-text" >heroImage</Text>
-              <Image
-
-                style={{ height: 120, width: '80%' }}
-                source={{
-                  uri: 'https://cdn.uatr.view.com.au/images/listing/slug/800-min/' + item.heroImageUrl.split("/")[2]
-
-                }}
-                testID={'heroImage' + index}
-
-              />
-              <Text style={{ fontSize: 15 }} testID="agent-image-text">agentPhotoImage</Text>
-              {
-                item.agents.map((agentItem: any, agentindex: number) => {
-                  return (
-
-                    <Image
-
-                      key={'agentPhotoImage' + agentindex}
-                      style={{ height: 120, width: '100%', marginTop: 5 }}
-                      source={{
-                        uri: 'https://cdn.uatr.view.com.au/images/listing/55-w/' + agentItem.agentPhotoFileName
-
-                      }}
-                      testID={'agentPhotoImage' + agentindex + index}
-                    />
-
-                  );
-                })
-              }
-              <Text testID="house-image-text"> HouseImage</Text>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} pagingEnabled={true}
-                onScroll={e => {
-                  const x = e.nativeEvent.contentOffset.x;
-                  setActiveIndex(Number((x / width).toFixed(0)));
-
-                }}
-
-                testID={'houseImagesScrollView' + index}
-              >
-                <View style={{ flexDirection: 'row' }}>
-                  {
-                    item.images.map((houseimg: any, houseindex: number) => {
-
-                      return (
-                        <View style={{ width: width * 0.9, height: 150, marginLeft: 5 }}
-                          key={'HouseImage' + houseindex}>
-                          <Image
-                            style={{ height: 150, width: '100%', marginTop: 5 }}
-                            source={{
-                              uri: 'https://cdn.uatr.view.com.au/images/listing/slug/800-min/' + houseimg.url.split("/")[2]
-
-                            }}
-                            testID={'houseImage' + houseindex + index}
-
-                          />
-                        </View>
-                      );
-                    })
-                  }
-                </View>
-
-              </ScrollView>
-              <View style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-
-              >
-                {
-
-                  item.images.map((activeitem: any, imageindex: number) => {
-                    return (
-                      <View style={{
-                        width: activeIndex == imageindex ? 16 : 8,
-                        height: activeIndex == imageindex ? 10 : 8,
-                        borderRadius: activeIndex == imageindex ? 5 : 4,
-                        backgroundColor: activeIndex == imageindex ? 'red' : 'gray',
-                        marginLeft: 5,
-                        marginTop: 8,
-                      }}
-                      />
-                    );
-                  })
-                }
-
-              </View>
-            </View>
-          );
-        }}
-        keyExtractor={(item, index) => index.toString()}
-      />
-
-    </View>
-
-
-  );
-};
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="ImageView" component={ImageView} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
 
 export default App
