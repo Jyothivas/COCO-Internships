@@ -1,70 +1,76 @@
-import React,{useState} from 'react';
-import { Button} from 'react-native';
-import { NavigationContainer} from '@react-navigation/native';
+import React, { useState } from 'react';
+import { Button } from 'react-native';
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home } from './Component/Home';
 import { Login } from './Component/Login';
 
 
-type User ={
+type User = {
   name: string,
   email: string,
 }
 
-const Stack = createNativeStackNavigator();
+const { Screen, Navigator } = createNativeStackNavigator();
 
-const App=()=>{
- 
-  const [Users, setUser] = useState<User[]>([]);
+const App = () => {
+
+  const navigationRef: any = useNavigationContainerRef();
+
+
+  const [users, setUser] = useState<User[]>([]);
 
   const handleAddUser = (name: string, email: string) => {
-    setUser([...Users, { name, email }]);
+
+    setUser([...users, { name, email }]);
+    navigationRef.navigate('List')
+
   };
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator 
-      screenOptions={{
-        headerStyle:{
-          backgroundColor:'blue',
-         
-        },
-        headerTintColor:'white',
-       headerTitleStyle:{
-          fontSize:25,
-        }
-       }}>
-        <Stack.Screen name='Home'
-        options={({navigation}) => ({
-          title: `Names : ${Users.length}`,
-          headerStyle: {
-            backgroundColor: '#273469',
-          },
-          headerTintColor: '#EBF2FA',
-          headerRight: () => (
-            
-            <Button                // a button in the header!     
-              onPress={() => 
-              navigation.navigate('Login')}
-              title="+"
-            />
-          ),})}
-       >
-         {(navigation) => <Home navigation={navigation} UserData={Users} />}
-       </Stack.Screen>
+  const HomeList = () => ({
+    title: `Users : ${users.length}`,
+    headerStyle: {
+      backgroundColor: '#273469',
+    },
+    headerTintColor: '#EBF2FA',
+    headerRight: () => (
 
-       <Stack.Screen name='Login'
-       
-       options={{
-        title:'Login_Screen'
-        ,
-       }}>
-      
-          {(props) => <Login {...props}  AddUser={handleAddUser} />}
-         </Stack.Screen>
-       
-      </Stack.Navigator>
-      
+      <Button
+        onPress={() =>
+          navigationRef.navigate('Form')}
+        title="+"
+      />
+    ),
+  })
+  const LoginTitle = {
+    title: 'Form'
+    ,
+  }
+  const ScreenOption = {
+    headerStyle: {
+      backgroundColor: '#273469',
+
+    },
+    headerTintColor: 'white',
+    headerTitleStyle: {
+      fontSize: 25,
+    }
+  }
+  return (
+    <NavigationContainer ref={navigationRef}>
+
+      <Navigator screenOptions={ScreenOption}>
+
+        <Screen name='List' options={HomeList}>
+          {() => <Home UserData={users} />}
+        </Screen>
+
+        <Screen name='Form' options={LoginTitle}>
+          {() => <Login AddUser={handleAddUser} />}
+        </Screen>
+
+      </Navigator>
+
     </NavigationContainer>
   );
 }
