@@ -1,37 +1,58 @@
-import React, { useState, FC } from 'react';
+import React, { useEffect,useState, FC } from 'react';
 import { FlatList, Text, View } from 'react-native';
-import Jsondata from '../Assests/listings-buy-data.json';
 import HomeCard from './HomeCard';
 
+
 interface homepropstype {
-    navigation: any
+    navigation: any,
+    housedata:any
 }
 
 const Home: FC<homepropstype> = (props) => {
+const [HouseData, sethousedata] = useState(props.housedata || []);
+
+const getApidata=async()=>{
+    try{
+        const url="http://192.168.0.105:3000/data"
+        let result=await fetch(url, {method:"GET"})
+        let apiresult =await result.json();
+       
+        sethousedata(apiresult.listings.data)
+    }
+    catch(error){
+        
+    }
+}
+useEffect(()=>{
+    getApidata();
+},[])
 
 
-    const [HouseData] = useState(Jsondata.data.listings.data);
+
 
 
     return (
         <View style={{ flex: 1 }}>
             <FlatList
+            testID='flatList'
                 data={HouseData}
-                ListEmptyComponent={<Text>No data available</Text>}//no need
+                ListEmptyComponent={<Text>No data available</Text>}
 
-                renderItem={({ item, index }) => {
+                renderItem={({ item}) => {
 
                     return (
                         <View style={{ width: '100%', alignItems: 'center' }}>
                             <HomeCard
+                            
                                 HeroImage={item.heroImageUrl}
-                                Description={item.bathrooms + " bathrooms," + item.bedrooms + " bedrooms for sale in:" + item.streetAddress}
+                                Description={item.bathrooms + ' bathrooms,' + item.bedrooms + ' bedrooms for sale in:' + item.streetAddress}
                                 AgentImage={item.agents}
                                 onpressImage={() => {
-                                    props.navigation.navigate("ImageView", {
-                                        images: item.images
-                                    })
+                                    props.navigation.navigate('ImageView', {
+                                        images: item.images,
+                                    });
                                 }}
+
                             />
                         </View>
                     );

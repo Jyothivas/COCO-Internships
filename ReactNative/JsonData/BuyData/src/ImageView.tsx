@@ -1,5 +1,5 @@
-import { View, ScrollView, Dimensions, Image } from 'react-native'
-import React, { FC, useState } from 'react'
+import { View, ScrollView, Dimensions, Image } from 'react-native';
+import React, { FC, useState } from 'react';
 interface imageviewprops {
     route: any,
 

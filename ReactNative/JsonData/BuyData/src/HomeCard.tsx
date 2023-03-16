@@ -11,7 +11,7 @@ const HomeCard: FC<HomeCardprops> = (props) => {
 
 
   return (
-    <View style={{ width: '95%', elevation: 10, backgroundColor: 'white', borderRadius: 10, alignSelf: 'center', marginTop: 5 }}>
+    <View testID='homeCard' style={{ width: '95%', elevation: 10, backgroundColor: 'white', borderRadius: 10, alignSelf: 'center', marginTop: 5 }}>
       <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }} >
         <TouchableOpacity
           style={{
@@ -48,7 +48,7 @@ const HomeCard: FC<HomeCardprops> = (props) => {
                 key={'agentPhotoImage' + agentindex}
                 style={{ height: 60, width: 60, marginTop: 5, marginLeft: '3%', borderRadius: 10 }}
                 source={{
-                  uri: 'https://cdn.uatr.view.com.au/images/listing/55-w/' + agentItem.agentPhotoFileName
+                  uri: 'https://cdn.uatr.view.com.au/images/listing/55-w/' + agentItem.agentPhotoFileName,
 
                 }}
               />
