@@ -1,20 +1,16 @@
 import React from "react";
 import { fireEvent, render } from '@testing-library/react-native';
 import UserForm from "../components/UserForm";
-import renderer from 'react-test-renderer';
-
 
 describe('UserForm Component', () => {
     const handleAddUser = jest.fn();
 
     it('UserForm component is defined', () => {
-        expect(UserForm).toBeDefined();
-    })
-    it('renders correctly', () => {
-        renderer.create(<UserForm onAddUser={handleAddUser} navigation={null} />);
+        expect(UserForm).toBeDefined();   //
     });
+
     it('UserForm component renders correctly', () => {
-        const { getByTestId, getByText, getByPlaceholderText } = render(<UserForm onAddUser={handleAddUser} navigation={null} />)
+        const { getByTestId, getByText, getByPlaceholderText } = render(<UserForm onAddUser={handleAddUser} />)
 
         const component = getByTestId('user-form');
         expect(component).toBeDefined();
@@ -37,67 +33,49 @@ describe('UserForm Component', () => {
         const cancelButton = getByText('Cancel');
         expect(cancelButton).toBeDefined();
 
-    });
-
-    it('should add a user when the Add button is pressed', () => {
-
-        const navigation ={navigate:()=>{}}
-        jest.spyOn(navigation,'navigate')
-
-        const { getByPlaceholderText, getByText } = render(<UserForm navigation={navigation} onAddUser={handleAddUser}  />);
-
-        const nameInput = getByPlaceholderText('Enter your name');
-        const emailInput = getByPlaceholderText('Enter your email');
-        const addButton = getByText('Add');
-
-        fireEvent.changeText(nameInput, 'John');
-        fireEvent.changeText(emailInput, 'john@example.com');
-        fireEvent.press(addButton);
-
-        expect(handleAddUser).toHaveBeenCalledWith('John', 'john@example.com')
-        expect(navigation.navigate).toBeCalledWith('User Data')
-
-    });
-
-    it('should navigate to User Data screen a user when the Add button is pressed', () => {
         
-        const navigation ={navigate:()=>{}}
-        jest.spyOn(navigation,'navigate')
 
-        const { getByPlaceholderText, getByText } = render(<UserForm navigation={navigation} onAddUser={handleAddUser}  />);
+    });
+
+    it('when a user pressed Add button then it called with name and email', () => {
+
+        const { getByPlaceholderText, getByText } = render(<UserForm onAddUser={handleAddUser} />);
 
         const nameInput = getByPlaceholderText('Enter your name');
         const emailInput = getByPlaceholderText('Enter your email');
         const addButton = getByText('Add');
 
-        fireEvent.changeText(nameInput, 'John');
-        fireEvent.changeText(emailInput, 'john@example.com');
+        fireEvent.changeText(nameInput, 'rohan');
+        fireEvent.changeText(emailInput, 'rohan@example.com');
         fireEvent.press(addButton);
 
-        expect(navigation.navigate).toBeCalledWith('User Data')
+        expect(handleAddUser).toHaveBeenCalledWith('rohan', 'ohn@example.com')
 
     });
 
-    
+    it('when given filed is empty and user press add button then not be called', () => {
+
+        const handleAddUser = jest.fn();
+
+        const { getByPlaceholderText, getByText } = render(<UserForm onAddUser={handleAddUser} />);
+
+        const nameInput = getByPlaceholderText('Enter your name');
+        const emailInput = getByPlaceholderText('Enter your email');
+        const addButton = getByText('Add');
+
+        fireEvent.changeText(nameInput, '');
+        fireEvent.changeText(emailInput, '');
+        fireEvent.press(addButton);
+
+        expect(handleAddUser).not.toBeCalled()
+
+    });
+
+
+
+
+
+
+
 
 })
-
-it('should pass empty field and press button', () => {
-
-    const navigation ={navigate:()=>{}}
-    jest.spyOn(navigation,'navigate')
-    const handleAddUser = jest.fn();
-
-    const { getByPlaceholderText, getByText } = render(<UserForm navigation={navigation} onAddUser={handleAddUser}  />);
-
-    const nameInput = getByPlaceholderText('Enter your name');
-    const emailInput = getByPlaceholderText('Enter your email');
-    const addButton = getByText('Add');
-
-    fireEvent.changeText(nameInput,'');
-    fireEvent.changeText(emailInput,'');
-    fireEvent.press(addButton);
-
-    expect(handleAddUser).not.toBeCalled()
-
-});
