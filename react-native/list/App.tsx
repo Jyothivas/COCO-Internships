@@ -1,6 +1,7 @@
 import React from 'react'
-import { View } from 'react-native'
-import ListBuy from './Component/ListBuy'
+import { Text, View } from 'react-native'
+import { ListBuy } from './Component/ListBuy'
+import Scroll from '../list/Component/ScrollView'
 
 const App = () => {
   return (
@@ -11,4 +12,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;

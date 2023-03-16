@@ -1,46 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FlatList, Text, View, Image } from 'react-native';
-import JsonData from '../listings-buy-data.json';
+import axios from 'axios'
 
-
+const url = `http://192.168.0.102:3000/data`
 
 const ListBuy = () => {
 
-  const jData = JsonData.data.listings.data;
-  const [JsonFetchData] = useState(jData)
 
+  const [details, setDetails] = useState<any>([]);
+
+  useEffect(() => {
+    const getAPI = async () => {
+      try {
+
+        const { data: { listings: { data } } } = await axios.get(url);
+
+        return setDetails(data);
+
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getAPI();
+  }, [])
   return (
     <View style={{ flex: 1 }} >
       <FlatList testID='flatList'
-        data={JsonFetchData}
+        data={details}
 
         renderItem={({ item }) => {
 
           return (
             <View>
-              <Text style={{ fontSize: 15 }}>Agents Photo</Text>
-              {
-                item.agents.map((agentItem: any, index: number) => {
+              <Text style={{ fontSize: 15 }}>agent photo</Text>
+              <FlatList
+                testID='secondFlatlist'
+                data={item.agents}
+                renderItem={({ item }) => {
                   return (
+                    <View>
+                      <Image
+                        accessibilityHint='agent'
+                        testID='agentImage'
 
-                    <Image
-                      testID='agentImage'
-                      key={'agentPhotoImage' + index}
-                      style={{ height: 100, width: 100, marginTop: 5 }}
-                      alt='agentPhotoImage'
-                      source={{
+                        style={{ height: 100, width: 100, marginTop: 5 }}
+                        alt='agentPhotoImage'
+                        source={{
 
-                        uri: `https://cdn.uatr.view.com.au/images/listing/1000-w/${agentItem.agentPhotoFileName}`
+                          uri: `https://cdn.uatr.view.com.au/images/listing/1000-w/${item.agentPhotoFileName}`
 
-                      }}
-                    />
-
+                        }}
+                      />
+                    </View>
                   )
-                })
-              }
-              <Text style={{ fontSize: 15 }}>Hero Image</Text>
+                }}
+              />
+
+
+              <Text style={{ fontSize: 15 }}>House photo</Text>
               <Image
-                testID='heroImage'
+                testID='houseImage'
                 style={{ height: 300, width: 500, }}
                 alt='heroImage'
                 source={{
@@ -64,5 +83,6 @@ const ListBuy = () => {
 
   )
 }
+export { ListBuy, url };
 
-export default ListBuy;
+

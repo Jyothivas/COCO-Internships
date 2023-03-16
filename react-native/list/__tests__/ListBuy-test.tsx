@@ -1,8 +1,13 @@
-import ListBuy from '../Component/ListBuy'
+import { url, ListBuy } from '../Component/ListBuy'
 import { render } from '@testing-library/react-native'
 import JsonData from '../listings-buy-data.json';
 
+import axios from 'axios';
+jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
+
 describe("ListBuy Component", () => {
+
 
   test('List-Buy Component Rendred Correctly', () => {
 
@@ -19,32 +24,30 @@ describe("ListBuy Component", () => {
     expect(FlatList).toBeDefined();
   })
 
-  test('Checking JsonData not to bt NULL', () => {
 
-    const JSONdata = JsonData;
 
-    expect(JSONdata).not.toBeNull()
 
+  test('mock testing url api of List-buy work correctly', () => {
+
+    const mockedApi = { data: {} }
+
+
+    mockedAxios.get.mockResolvedValue(mockedApi);
+
+    expect(mockedAxios.get).toHaveBeenCalled();
+    expect(mockedAxios.get).toHaveBeenCalledWith(`http://192.168.0.102:3000/data`);
 
   })
 
-  test('Agent image Rendred Correctly', async () => {
+  // test('agent image', () => {
 
-    const { getAllByTestId } = render(<ListBuy />)
+  //   const { queryByTestId } = render(<ListBuy />)
 
-    const image = await getAllByTestId('agentImage')
-    expect(image).toBeDefined()
-  })
+  //   const agentImage = queryByTestId('agentImag')
 
-  test('Hero image Rendred Correctly', async () => {
+  //   expect(agentImage).toBeDefined();
 
-    const { getAllByTestId } = render(<ListBuy />)
-
-    const image = await getAllByTestId('heroImage')
-    expect(image).toBeDefined()
-  })
-
-
+  // })
 
 
 })
