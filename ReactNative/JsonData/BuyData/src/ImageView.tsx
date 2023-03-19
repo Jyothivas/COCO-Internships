@@ -9,16 +9,17 @@ const height = Dimensions.get('window').height;
 const ImageView: FC<imageviewprops> = (props) => {
     const [activeIndex, setActiveIndex] = useState(0);
     return (
-        <View>
+        <View 
+        testID='imagecontainer'
+        >
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} pagingEnabled={true}
                 onScroll={e => {
                     const x = e.nativeEvent.contentOffset.x;
                     setActiveIndex(Number((x / width).toFixed(0)));
 
                 }}
-
-
-            >
+                testID={"imagescrollview"}
+                >
                 <View style={{ flexDirection: 'row' }}>
                     {
                         props.route.params.images.map((houseimg: any, houseindex: number) => {
@@ -32,6 +33,7 @@ const ImageView: FC<imageviewprops> = (props) => {
                                             uri: 'https://cdn.uatr.view.com.au/images/listing/slug/800-min/' + houseimg.url.split("/")[2]
 
                                         }}
+                                        testID={"HouseImage"+houseindex}
 
 
                                     />
@@ -47,6 +49,7 @@ const ImageView: FC<imageviewprops> = (props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}
+            testID={'imageindicators'}
 
             >
                 {
@@ -63,6 +66,7 @@ const ImageView: FC<imageviewprops> = (props) => {
                                     marginLeft: 5,
                                     marginTop: 8,
                                 }}
+                                testID={'activeitem' + imageindex}
                             />
                         );
                     })

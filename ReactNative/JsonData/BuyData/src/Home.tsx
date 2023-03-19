@@ -5,7 +5,7 @@ import HomeCard from './HomeCard';
 
 interface homepropstype {
     navigation: any,
-    housedata:any
+    housedata ?:any
 }
 
 const Home: FC<homepropstype> = (props) => {
@@ -13,7 +13,7 @@ const [HouseData, sethousedata] = useState(props.housedata || []);
 
 const getApidata=async()=>{
     try{
-        const url="http://192.168.0.105:3000/data"
+        const url="http://192.168.0.101:3000/data"
         let result=await fetch(url, {method:"GET"})
         let apiresult =await result.json();
        
@@ -43,7 +43,7 @@ useEffect(()=>{
                     return (
                         <View style={{ width: '100%', alignItems: 'center' }}>
                             <HomeCard
-                            
+
                                 HeroImage={item.heroImageUrl}
                                 Description={item.bathrooms + ' bathrooms,' + item.bedrooms + ' bedrooms for sale in:' + item.streetAddress}
                                 AgentImage={item.agents}
