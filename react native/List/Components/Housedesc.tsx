@@ -8,11 +8,31 @@ type HouseDescProp={
 
 const Housedesc = (props: HouseDescProp) => {
     return(
-        <View style={style.whole}>
-            <Text style={style.price}>Price: $ {props.HouseDescData.priceFrom}</Text>
-            <Text style={style.state}>State: {props.HouseDescData.state}</Text>
-            <Text style={style.address}>Street Address: {props.HouseDescData.streetAddress}</Text>
-        </View> 
+        <View style={{ flex: 1, padding: 8 }}>
+           <Text style={style.address}>
+                {props.HouseDescData.streetAddress},
+                {props.HouseDescData.city},
+                {props.HouseDescData.state}
+            </Text> 
+            <Text style={style.detail}>
+                [{props.HouseDescData.propertyTypes}]
+            </Text>
+
+            <View  style={{ flex: 1 }}>
+                <Text style={style.price}>
+                  Price: ${props.HouseDescData.priceFrom}
+                </Text>
+                <Text style={style.detail}>
+                  Car Parks: {props.HouseDescData.carparks}
+                </Text>
+                <Text style={style.detail}>
+                  Bedrooms: {props.HouseDescData.bedrooms}
+                </Text>
+                <Text style={style.detail}>
+                  Bathrooms: {props.HouseDescData.bathrooms}
+                </Text>
+            </View>
+        </View>
     )
 }
 
@@ -24,17 +44,18 @@ const style = StyleSheet.create({
         marginTop:4
     },
 
-    state: {
+    detail: {
+        color: 'black',
         fontSize: 12,
-        padding: 1,
-    },
+        padding: 1
+      },
     price: {
         fontWeight: 'bold',
         fontSize: 14,
         padding: 2
     },
     address: {
-        
+        color: 'black',
         fontSize: 12,
     }
   })

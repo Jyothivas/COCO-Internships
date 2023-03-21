@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Button, FlatList, Image, StyleSheet, Text, View } from "react-native"
-import { create } from "react-test-renderer";
+
 
 type HousePicProps = {
   HousePicData: any;
@@ -12,14 +12,19 @@ const Housepic = (props: HousePicProps) => {
   
   
   return(
-    <View style={{flex: 1}}>
+    <View
+      
+      style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
       <Image
-        style={{ height: 150, width: '90%' }}
+        
+        style={{ height: 150, width: '100%', borderRadius: 10}}
         source={{
-          uri: `https://cdn.uatr.view.com.au/images/listing/1000-w/${props.HousePicData.heroImageUrl}`
+            uri: 'https://cdn.uatr.view.com.au/images/listing/slug/1000-min/' + props.HousePicData?.heroImageUrl.split("/")[2]
         }}
-       /> 
-    </View>  
+      />
+      </View>
+    </View>
   )
 
 }
