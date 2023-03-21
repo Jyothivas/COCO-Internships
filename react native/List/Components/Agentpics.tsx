@@ -23,7 +23,7 @@ const Agentpics = (props: AgentPicsProps) =>{
                         <View style={{ flex: 1}}>
                             <Image
                                 key={'agentPhotoImage' + index}
-                                style={{height: 80, width: 80,margin:5, borderRadius: 40 }}
+                                style={{height: 60, width: 60,margin:5, borderRadius: 40 }}
                                 source={{
                                     uri: 'https://cdn.uatr.view.com.au/images/listing/1000-w/' + item.agentPhotoFileName
                                 }}

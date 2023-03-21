@@ -6,6 +6,7 @@ import Housepic from "./Housepic"
 
 type houseCardProps = {
   HouseData: any
+  navigation: any
 }
 
 const Housecard = (props: houseCardProps) =>{
@@ -20,7 +21,7 @@ const Housecard = (props: houseCardProps) =>{
           return(
             <View style={style.card}>
               <View style={{ flexDirection: 'row', width: '100%', }}>
-                <Housepic HousePicData={item}/>
+                <Housepic HousePicData={item} navigation={props.navigation}/>
                 <Housedesc HouseDescData={item}/>
               </View>
               <View>

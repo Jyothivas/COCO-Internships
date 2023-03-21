@@ -10,12 +10,10 @@ const Housedesc = (props: HouseDescProp) => {
     return(
         <View style={{ flex: 1, padding: 8 }}>
            <Text style={style.address}>
-                {props.HouseDescData.streetAddress},
-                {props.HouseDescData.city},
-                {props.HouseDescData.state}
+                {props.HouseDescData.streetAddress}, {props.HouseDescData.city}, {props.HouseDescData.state}
             </Text> 
             <Text style={style.detail}>
-                [{props.HouseDescData.propertyTypes}]
+                Type: {props.HouseDescData.propertyTypes}
             </Text>
 
             <View  style={{ flex: 1 }}>
@@ -52,7 +50,8 @@ const style = StyleSheet.create({
     price: {
         fontWeight: 'bold',
         fontSize: 14,
-        padding: 2
+        padding: 2,
+        color: 'black'
     },
     address: {
         color: 'black',
