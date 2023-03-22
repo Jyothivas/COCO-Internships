@@ -3,11 +3,14 @@ import { Button, FlatList, Image, StyleSheet, Text, View, TouchableOpacity } fro
 
 
 type HousePicProps = {
-  HousePicData: any;
-  navigation: any
+  HousePicData: any,
+  HouseImages: (images: []) => void;
 }
 
 const Housepic = (props: HousePicProps) => {
+  const showimages = () => {
+    props.HouseImages(props.HousePicData)
+  }
 
   return(
     <View
@@ -15,10 +18,7 @@ const Housepic = (props: HousePicProps) => {
       style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         <TouchableOpacity
-            onPress={
-                ()=> props.navigation.navigate('House Images',props.HousePicData)
-                
-          }>
+            onPress={()=> showimages()}>
           <Image
 
             style={{ height: 150, width: '100%', borderRadius: 10}}

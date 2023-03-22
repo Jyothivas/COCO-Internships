@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { Button, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native"
 
-const ListBuy = () =>{
+const ListBuy = () => {
 const[Data,setData] =useState([]);
 
-  const getAPIData =async() => {
-    const url="http://192.168.1.17:3000/data";
+  const getAPIData = async() => {
+    const url="http://192.168.29.96:3000/data";
     let result: any = await fetch(url);
     result=  await result.json();
     setData(result.listings.data);  

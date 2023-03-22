@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, View, Dimensions, Image } from 'react-native';
 
 type houseImagesProp = {
-    route: any
+    houseImage: any
 }
 
 const Houseimages = (props: houseImagesProp) => {
@@ -11,13 +11,13 @@ const Houseimages = (props: houseImagesProp) => {
         <View style={style.images}>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {
-                props.route.params?.images.map((houseimg: any, index: number) => {
+                props.houseImage.images.map((houseimg: any, index: number) => {
                     return (
                         <View
-                            style={{ width: width, height: height / 2, justifyContent: 'center', alignItems: 'center' }}
+                            style={{ width: width, height: height / 4,  alignItems: 'center' }}
                             key={'HouseImage' + index} >
                             <Image
-                                style={{ width: "95%", height: '100%' }}
+                                style={{ width: "98%", height: '100%' }}
                                 source={{
                                     uri: 'https://cdn.uatr.view.com.au/images/listing/slug/800-min/' + houseimg.url.split("/")[2]
                                 }}
