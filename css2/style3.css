@@ -1,0 +1,50 @@
+div{
+    background-color: green;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+div:hover{
+    background-color: pink;
+}
+/*unvisited link*/
+a:link{
+    color: red;
+}
+/*visited link*/
+a:visited{
+    color: green;
+}
+/*move over link*/
+a:hover{
+    color: hotpink;
+}
+/*selected link*/
+a:active{
+    color: blue;
+}
+p {
+    display: none;
+    background-color: black;
+    padding: 20px;
+  }
+  
+  div:hover p {
+    display: block;
+  }
+  p::first-line {
+    color: #ff0000;
+    font-variant: small-caps;
+  }
+  p::first-letter {
+    color:white;
+    font-size: xx-large;
+  }
+  ::marker { 
+    color: blueviolet;
+    font-size: 23px;
+  }
+  ::selection {
+    color: rgb(0, 221, 255);
+    background: yellow;
+  }
