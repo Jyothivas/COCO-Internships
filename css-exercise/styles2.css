@@ -1,0 +1,51 @@
+h1,h2,p{
+    margin:2px;
+    padding:2px;
+}
+h3{
+    color:blue
+}
+#id{
+    color:red;
+}
+.type1{
+    color:gray;
+}
+*{
+    text-align: center;
+}
+/*Descendant Selector*/
+div.box1 p{
+    background-color: antiquewhite;
+}
+/*Child Selector*/
+div.box1 > p{
+    color: blueviolet;
+}
+/*Adjacent Sibling Selector*/
+h2 + p{
+    color: brown;
+}
+h2 ~ p{
+    text-align: left;
+}
+
+input[type="text"]{
+    border:2px solid red;
+}
+
+a:hover{
+    color: red;
+}
+a:visited{
+    color: violet;
+}
+
+#pseudo::first-letter{
+    font-size: 35px;
+    color: black;
+}
+
+#pseudo::before{
+    content: 'CSS ';
+}

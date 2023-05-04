@@ -1,0 +1,33 @@
+.box1{
+    background: white;
+    text-align: center;
+    border:2px dotted black;
+    padding:5px;
+    width:300px;
+    height:100px;
+    margin:10px 50px 45px 45px;
+}
+.box2{
+    background: #d3d3d3;
+    width:400px;
+    height:200px;
+    padding:5px;
+    margin:15px 100px 150px 45px;
+    border:2px solid black;
+}
+.box3{
+    background: green;
+    width:500px;
+    height:300px;
+    padding:5px;
+    margin:15px 100px 150px 45px;
+    border:2px solid black;
+}
+.box4{
+    background: #d3d3d3;
+    width:600px;
+    height:400px;
+    padding:5px;
+    margin:150px 150px 150px 150px;
+    border:2px dotted black;
+}
