@@ -1,0 +1,25 @@
+/* space selector */
+/* div p{
+    background: #db1616;
+    color: aqua;
+} */
+
+/* child */
+/* div>p{
+    background: #db1616;
+    color: aqua;
+} */
+
+/* adjacent sibling*/
+div+p{
+    background: #db1616;
+    color: aqua;
+}
+
+/* general sibling */
+div~p{
+    background: #db1616;
+    color: aqua;
+}
+
+
