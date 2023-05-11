@@ -1,0 +1,263 @@
+@font-face {
+    font-family: 'myFont';
+    src: url('fonts/bootstrap-icons.woff');
+    font-weight:100;
+}
+@font-face {
+    font-family: 'myFont2';
+    src: url(fonts/bootstrap-icons.woff2);
+}
+header{
+    font-family:MyFont,sans-serif;
+    width: 100%;
+    height:40px;
+    background-color:#F6BE00;
+    padding-top: 10px;  
+}
+.right{
+    float:left;
+    font-weight: bold;
+    color:white;
+    font-weight: bold;
+    margin-left: 25px;
+    margin-top: 5px;
+}
+#bgvideo{
+    margin-top: -1.7%;
+    padding: 1%;
+    margin-left: 4%;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+header p{
+    position: relative;
+    margin-left: 5%;
+    font-weight: bold;
+}
+.header{
+    width:100%;
+    min-height:100vh;        
+    position: relative;
+    background-position: center;    
+    background-size: cover;
+    background-color: black;
+}
+nav{
+    display: flex; 
+    padding: 1%;
+    justify-content: space-between;
+    align-items: center;
+}
+.navlinks{
+    text-align: right;
+}
+.navlinks ul button{
+    position: relative;
+    margin-left: 30px;
+    background-color: #CC5500;
+    border-radius:25px;
+    border: none;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    padding: 8px 20px 8px 20px;
+  }
+.navlinks ul li{
+    font-family:MyFont,sans-serif;
+    list-style: none;
+    width:10%;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
+.navlinks ul li a{
+    text-decoration: none;
+    font-size: 13px;
+    color:#fff;
+}
+.navlinks ul li a:hover{
+    color: orange;
+}
+.text{
+    font-family:MyFont,sans-serif;
+    width: 50%;
+    color:#fff;
+    left:25%;
+    top: 35%;
+    position: absolute;
+    text-align: center;
+}
+.text button{
+    background-color: #CC5500;
+    border-radius:25px;
+    border: none;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    padding: 8px 20px 8px 20px;   
+}
+.text h1{
+    font-size: 61px;
+    font-weight: bold;    
+}
+.text p{
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+.details ul li{
+    color: #fff;
+    font-family:MyFont,sans-serif;
+    list-style: none;
+    display: inline-block;
+    width: 30%;
+    margin-left:1%;
+    justify-content: space-between;
+    text-align: center;
+    position: relative;
+    margin-top: 35%;
+}
+
+/*2nd page*/
+.secondpage{
+    /* margin-top: ; */
+    width:100%;
+    min-height:100vh; 
+    font-family:MyFont,sans-serif;      
+    position: absolute;
+    background-image: url(images/edward-unsplash-blur.jpg);
+}
+.textbox{
+    color: #fff;
+    position: relative;
+    margin-top: 10%;
+}
+.box{
+    background-size: cover;
+    background-color: #fff;
+    height: 400px;
+    position: relative;
+    margin-top: 10%;
+    border-radius:5%;
+    background-image: url(images/pexels-alexander-suhorucov-6457579.jpg);
+}
+.container-fluid{
+    position: relative;
+    margin-top: 48%;
+    opacity: 0.9;
+    height: 30%;
+    border-radius: 15px;
+    backdrop-filter: blur(15px);
+    background-color:rgba(255, 255, 255, 0.9);
+}
+.container-fluid h1{
+    color: black;
+}
+.container-fluid p{
+    font-size: 16px;
+    color:#a6a39e;
+}
+/*Third page*/
+ .thirdpage{
+    font-family:MyFont,sans-serif;
+    width:100%;
+    
+    min-height:100vh;      
+}
+.artist1{
+    height: 500px;
+    width: 65%;
+    padding: 1%;
+    border-radius: 5%;
+    margin-left: 35%;
+}
+.artist2{
+    border-radius: 5%;
+    padding: 1%;
+    height:47%;
+    width: 65%;
+    position: relative;
+    margin-left: -5%;
+}
+
+/* fourth page */
+.fourthpage{
+    width:100%;
+    font-family: myFont,sans-serif;
+    font-size: 15px;
+    min-height:100vh;
+    position: absolute;
+    background-image: url(images/nainoa-shizuru-unsplash-blur.jpg);
+}
+
+.website5{
+    width: 100%;
+    min-height: 100vh;
+    margin-top: 10%;
+    background-color: #f0f8ff;
+    text-align: center;
+}
+.website5 h1{
+    position: relative;
+    top: 80px;
+    font-weight: bold;
+}
+
+.pass{
+    height: 350px;
+    border: 3px dotted black;
+    border-radius: 5%;
+    margin-top: 8%;
+    text-align: left;
+    margin-left: -50px;
+}
+
+.pass1{
+    height: 370px;
+    border: 3px dotted black;
+    border-radius: 5%;
+    margin-top: 8%;
+    margin-left: 40px;
+    text-align: left;
+} 
+.site-footer {
+   
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 30px;
+  }
+.site-footer-top {
+
+    background-repeat: no-repeat;
+    margin-bottom: 70px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }  
+
+  .site-footer-bottom {
+    border-top: 1px solid #1f1c1c;
+    margin-top: 60px;
+  }
+  
+  .site-footer-title {
+    color: var(--primary-color); 
+  }
+  
+  .site-footer-link,
+  .copyright-text {
+    color: var(--white-color);
+  }
+  
+  .site-footer-links {
+    padding-left: 0;
+  }
+  
+  .site-footer-link-item {
+    list-style: none;
+    display: inline-block;
+    margin-right: 15px;
+  }
+  
+  .copyright-text {
+    font-size: var(--copyright-font-size);
+  }
