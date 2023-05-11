@@ -49,15 +49,20 @@
             </div>
         </form>
     </div>
-    <table id="myTable" class="table" >
+    <table id="myTable" class="table table-bordered data-table" >
         <thead>
           <tr>
+            <th>Sr.No</th>
             <th>Email-ID</th>
             <th>Age</th>
             <th>Gender</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
+          <button class="btn btn-primary ml-2" onclick="editOperation()">Edit</button>
+          <button class="btn btn-primary ml-2" onclick="deleteOperation()">Delete</button>
+
         </tbody>
       </table>
     <script>
@@ -76,7 +81,8 @@
           })
         })()
 
-        var arr=[]
+        var arr=[];
+        var count=0;
         function arrayOperation(){
             var email=document.getElementById("eid").value;
             var age=document.getElementById("user-age").value;
@@ -88,23 +94,90 @@
                     break;
                 }
             }
-            var data=[email,age,selectedValue];
+            count++;
+            var dlt='<button class="btn btn-primary ml-2" onclick="editOperation()" id="edit">Edit</button>'+
+            '<button class="btn btn-primary ml-2" onclick="delete2Operation()">Delete</button>';
+            var data=[count,email,age,selectedValue,dlt];
             arr[arr.length]=data;
             insertData(); 
         }
         function insertData(){
-            $(document).ready(function() {
+          $(document).ready(function() {
             $('#myTable').DataTable({
                 bDestroy: true,
                 data:arr,
                 columns: [
+                  {title: "Sr-No"},
                 { title: "Email-ID" },
                 { title: "Age" },
-                { title: "Gender" }
+                { title: "Gender" },
+                { title: "Action"}
                 ]
+              });
             });
-            });
+          }
+        
+        function deleteOperation(){
+          var input=parseInt(prompt('Enter the sr-no'));
+          for(var i=0;i<arr.length;i++){
+            if(arr[i][0]==input){
+              arr[i]=arr[i+1];
+            }
+            arr.length=arr.length-1;
+            count--;
+
+            break;
+          }
+          console.log(arr)
+          insertData();
         }
+
+        function delete2Operation(){
+          console.log(count);
+          for(var i=0;i<arr.length;i++){
+            if(arr[i][0]==count){
+              arr[i]=arr[i+1];
+            }
+            arr.length=arr.length-1;
+            count--;
+            break;
+          }
+          console.log(arr);
+          insertData();
+          
+        }
+        function editOperation(){
+          var index=parseInt(prompt('Enter the sr-no:'))-1;
+          var arrindex=parseInt(prompt('1-email , 2- age, 3- gender'));
+          var newvalue=prompt("Enter the new-value");
+          console.log(index,arrindex,newvalue)
+          arr[index][arrindex]=newvalue;
+          console.log(arr);
+          insertData();
+        }
+        // function edit2Operation(){
+        //   console.log(count)
+        //   // var index=count-1;
+        //   var displayitem=[]
+        //   for(var i=0;i<arr.length;i++){
+        //     if(arr[i][0]==count){
+        //       displayitem=arr[i];
+              
+        //     }
+        //   }
+          // console.log(displayitem)
+          // document.getElementById("eid").value=displayitem[1];
+          // document.getElementById("user-age").value=displayitem[2];
+          
+          // console.log(displayitem)
+          // console.log(displayitem)
+          // var arrindex=parseInt(prompt('1-email , 2- age, 3- gender'));
+          // var newvalue=prompt("Enter the new-value");
+          // console.log(index,arrindex,newvalue)
+          // arr[index][arrindex]=newvalue;
+          // console.log(arr);
+          // insertData();
+        
     </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js" defer="defer"></script>    
