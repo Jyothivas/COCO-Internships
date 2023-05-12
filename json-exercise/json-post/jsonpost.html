@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Hello</h1>
+    <p id="demo"></p>
+    <script>
+        const dbParam = JSON.stringify({"limit":10});
+        const xmlhttp = new XMLHttpRequest();
+        xmlhttp.onload = function() {
+            const myObj = JSON.parse(this.responseText);
+            let text ="";
+            for (let x in myObj) {
+                console.log(myObj)
+                text += myObj[x].CustomerName + "<br>";
+            }
+            document.getElementById("demo").innerHTML = text;
+        }
+        xmlhttp.open("POST","postphp.php");
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("x=" + dbParam);
+    </script>
+</body>
+</html>
