@@ -136,6 +136,8 @@ var Table=[];
 var sr=1;
 function myfunc()
 {
+    var Edit='<input type="button" class="btn btn-primary ml-2" onclick="editOperation()"> Edit'+
+            '<input type="button" class="btn btn-primary ml-2" onclick="deleteOperation()"> Delete';
     var Email = document.getElementById("email").value;
     var Age = document.getElementById("age").value;
 
@@ -158,13 +160,14 @@ function myfunc()
      }
     
     
-    Data = [sr,Email,Age,Gender,"Link"];
+    Data = [sr,Email,Age,Gender,Edit];
       
 
     Table[Table.length]=Data;
     console.log(Table);
 
     NewFunc();
+
     
 }
 
@@ -177,14 +180,24 @@ function NewFunc()
                 columns: 
                 [
                 { title: "Sr.No"},
-                { title: "Email-ID" },
-                { title: "Age" },
-                { title: "Gender" },
-                { title: "ACTION" }
+                { title: "Email-ID"},
+                { title: "Age"},
+                { title: "Gender"},
+                { title: "ACTION"}
                 ]
         });
     });
 }
+
+function deleteOperation()
+{
+    
+}
+
+
+
+   
+
 
 
 </script>
