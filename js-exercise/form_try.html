@@ -8,10 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <link href="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js">
-
-
-
-
     <style>
         .container{
             margin-top: 70 ;
@@ -24,7 +20,8 @@
             width: 100px;
             text-align: center;
         }
-        table {
+
+        /* table {
             border-collapse: collapse;
             counter-reset: serialno;
         }
@@ -37,7 +34,7 @@
         td:first-of-type::before {
             counter-increment: serialno;
             content: counter(serialno);
-        }
+        } */
     
 
 
@@ -99,9 +96,10 @@
                             </div>
                         </div>
 
-                        <button type="submit" value="Submit" class="btn btn-primary" onclick="callVal()">Submit</button>
+                        <button type="submit" value="Submit" class="btn btn-primary" onclick="callVal(),clearForm()" >Submit</button>
 
                     </div>
+<!-- table -->
 
                     <table id="myTable">
                         <thead>
@@ -114,12 +112,47 @@
                             </tr>
                         </thead>
                     </table>
+
+
+
+
+<!-- Bootstrap Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-body">
+                              <form >
+                                
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">Email-ID:</label>
+                                  <input type="text" class="form-control" name="useremail" id="modalemail">
+                                </div> 
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">Age:</label>
+                                  <input type="text" class="form-control" id="modalage" name="userage">
+                                </div>
+                                <div class="form-group">
+                                  <label for="recipient-name" class="col-form-label">Gender:</label>
+                                  <input type="text" class="form-control" id="modalgender" name="usergender">
+                                </div>
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                              <!-- <button type="button" class="btn btn-primary" onclick="editArray()">Submit</button> -->
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" id="modalSubmitButton">Submit</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      
                     
 
-                </form>
-            </div>
-        </div>
-    </div>
+               
+
+    <!-- <button onclick="removeSelectedRow">Remove</button> -->
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
@@ -150,9 +183,16 @@
 
 var Data=[]
 var Table=[]
-// var sr=1;
+var sr=1;
 function callVal()
 {
+    
+    
+    var edit='<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit</button>'+
+            '<button class="btn btn-primary ml-2" onclick="deleteOperation()">Delete</button>';
+
+    
+
     var Email = document.getElementById("email").value;
     var Age = document.getElementById("age").value;
 
@@ -167,21 +207,24 @@ function callVal()
         }
     }
 
-    // for(i=0;i<Data.length;i++)
-    // {
-    //     sr++;
-    //     break;
+    
 
-    // }
+    
+
+    for(i=0;i<Data.length;i++)
+    {
+        sr++;
+        break;
+
+    }
     
     // document.write(Email,Age,Gender);
     
-    const Data = [1,Email,Age,Gender,"link"];
+    Data = [sr,Email,Age,Gender,edit];
     Table[Table.length]=Data;
     console.log(Data);
     
     arrpara();
-
     
 }
 
@@ -201,15 +244,76 @@ function arrpara(){
             });
 }
 
+// function removeSelectedRow()
+// {
+//     table.bDestroy(sr);
+// }
+
+// function deleteRow(rowId) {
+//     // Get the row by its ID
+//     var row = document.getElementById(rowId);
+    
+//     // Remove the row from the table
+//     row.remove();
+//   }
+
+
+function deleteOperation()
+{
+    var index, Table = document.getElementById('myTable');
+    for(var i=1; i < Table.rows.length; i++)
+    {
+        Table.rows[i].cells[4].onclick = function()
+        {
+            index = this.parentElement.rowIndex;
+            Table.deleteRow(index);
+            console.log(index);
+
+            // for sr.no
+            for (var j = index; j < Table.rows.length; j++) {
+                Table.rows[j].cells[0].innerHTML = j; // Update the first cell (serial number)
+            }
+        };
+        
+    }
+
+}
+
+function clearForm() 
+{
+    document.getElementById("email").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("mf1").checked = false;
+    document.getElementById("mf2").checked = false;
+}
+
+
+document.getElementById('modalSubmitButton').addEventListener('click', function() {
+  var email = document.getElementById('modalemail').value;
+  var age = document.getElementById('modalage').value;
+  var gender = document.getElementById('modalgender').value;
+  // Do something with the submitted data (e.g., update the array or perform validation)
+
+  // Clear the modal inputs
+  document.getElementById('modalemail').value = '';
+  document.getElementById('modalage').value = '';
+  document.getElementById('modalgender').value = '';
+
+  // Close the modal
+  $('#exampleModal').modal('hide');
+});
+
+
 
 
 
 
 </script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
- 
 <script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js" defer="defer"></script>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <!-- <script src="script.js"></script> -->
     
