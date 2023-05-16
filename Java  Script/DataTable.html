@@ -7,6 +7,21 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
+
+
+    <!-- jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Bootstrap library -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- DataTables library -->
+  <link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+  <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+    
     
 
     <style>
@@ -97,7 +112,34 @@
         </div>
     </div>
 
-
+<!-- Boostrap Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <form >
+                
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Email-ID:</label>
+                  <input type="email" class="form-control" name="useremail" id="modalemail">
+                </div> 
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Age:</label>
+                  <input type="text" class="form-control" id="modalage" name="userage">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Gender:</label>
+                  <input type="text" class="form-control" id="modalgender" name="usergender">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="updateEmployee()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 
@@ -128,21 +170,28 @@
   })
 })()
 
-//------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////
 
 
 var Data=[];
 var Table=[];
 var sr=1;
+var Edit;
+var Email;
+var Age;
+var Radio;
+var Gender;
+
 function myfunc()
 {
-    var Edit='<input type="button" class="btn btn-primary ml-2" onclick="editOperation()"> Edit'+
-            '<input type="button" class="btn btn-primary ml-2" onclick="deleteOperation()"> Delete';
-    var Email = document.getElementById("email").value;
-    var Age = document.getElementById("age").value;
+    Edit = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-index="' + (Table.length - 1) + '">Edit</button>' +
+         '<button type="button" id="Delbtn" class="btn btn-danger" onclick="deleteOperation()">Delete</button>';
 
-    var Radio = document.getElementsByName("gender");
-    var Gender;
+    Email = document.getElementById("email").value;
+    Age = document.getElementById("age").value;
+
+    Radio = document.getElementsByName("gender");
+    Gender;
     for(var i=0; i<Radio.length; i++)
     {
         if(Radio[i].checked)
@@ -167,10 +216,6 @@ function myfunc()
     console.log(Table);
 
     NewFunc();
-
-    
-}
-
 function NewFunc()
 {
     $(document).ready(function() {
@@ -187,28 +232,69 @@ function NewFunc()
                 ]
         });
     });
-}
 
-function deleteOperation()
-{
     
 }
+}
+
+function deleteOperation() {
+  var table = document.getElementById('example');
+  for (var i = 1; i < table.rows.length; i++) {
+    table.rows[i].cells[4].onclick = function() {
+      var index = this.parentElement.rowIndex;
+      table.deleteRow(index);
+      // Update the Sr.No
+      for (var j = 1; j < table.rows.length; j++) {
+        table.rows[j].cells[0].innerHTML = j;
+      }
+    };
+  }
+}
+
+
+function updateEmployee() 
+{
+  var index = document.getElementById('exampleModal').querySelector('.btn-primary').getAttribute('data-index');
+  var rowData = Table[index];
+
+  // Update the data with the values from the modal form fields
+  rowData[1] = document.getElementById('modalemail').value;
+  rowData[2] = document.getElementById('modalage').value;
+  rowData[3] = document.getElementById('modalgender').value;
+
+  // Update the table with the modified data
+  var table = $('#example').DataTable();
+  table.row(index).data(rowData).draw();
+
+  // Close the modal dialog
+  $('#exampleModal').modal('hide');
+}
+
+
+function clearForm() 
+{
+    document.getElementById("email").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("mf1").checked = false;
+    document.getElementById("mf2").checked = false;
+}
 
 
 
-   
 
-
-
-</script>
+ </script>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
- 
-<script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js" defer="defer"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
-
+    <script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js" defer="defer"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
+
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 </body>
 </html>
 
