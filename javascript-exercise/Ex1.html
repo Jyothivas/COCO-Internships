@@ -45,7 +45,7 @@
                         Please select any option.
                      </div>
                 </div>
-                <button class="btn btn-primary mt-5" type="submit" onclick="arrayOperation()">Submit</button>
+                <button class="btn btn-primary mt-5"  type="submit" onclick="arrayOperation()">Submit</button>
             </div>
         </form>
     </div>
@@ -60,11 +60,39 @@
           </tr>
         </thead>
         <tbody>
-          <button class="btn btn-primary ml-2" onclick="editOperation()">Edit</button>
-          <button class="btn btn-primary ml-2" onclick="deleteOperation()">Delete</button>
-
+          
         </tbody>
       </table>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Serial-No:</label>
+            <input type="text" class="form-control" name="userserial" id="sr-no">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email-ID:</label>
+            <input type="text" class="form-control" name="useremail" id="modalemail">
+          </div> 
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Age:</label>
+            <input type="text" class="form-control" id="modalage" name="userage">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Gender:</label>
+            <input type="text" class="form-control" id="modalgender" name="usergender">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="editArray()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
     <script>
         (function () {
         'use strict'
@@ -82,8 +110,10 @@
         })()
 
         var arr=[];
-        var count=0;
+        var count=1;
+        var data=[]
         function arrayOperation(){
+          
             var email=document.getElementById("eid").value;
             var age=document.getElementById("user-age").value;
             var radioGroup = document.getElementsByName("gender");
@@ -94,16 +124,20 @@
                     break;
                 }
             }
-            count++;
-            var dlt='<button class="btn btn-primary ml-2" onclick="editOperation()" id="edit">Edit</button>'+
-            '<button class="btn btn-primary ml-2" onclick="delete2Operation()">Delete</button>';
-            var data=[count,email,age,selectedValue,dlt];
+            for(var i=0;i<data.length;i++){
+              count++;
+              break;
+            }
+            
+            var dlt='<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="editOperation('+count+')">Edit</button>'+
+            '<button class="btn btn-primary ml-2" onclick="deleteOperation('+count+')">Delete</button>';
+            data=[count,email,age,selectedValue,dlt];
             arr[arr.length]=data;
-            insertData(); 
+            insertData();     
         }
         function insertData(){
-          $(document).ready(function() {
-            $('#myTable').DataTable({
+          $(document).ready(function () {
+        var table= $('#myTable').DataTable({
                 bDestroy: true,
                 data:arr,
                 columns: [
@@ -115,69 +149,49 @@
                 ]
               });
             });
-          }
-        
-        function deleteOperation(){
-          var input=parseInt(prompt('Enter the sr-no'));
+          } 
+        function deleteOperation(serialno){
+          console.log("line140: "+serialno);
           for(var i=0;i<arr.length;i++){
-            if(arr[i][0]==input){
-              arr[i]=arr[i+1];
-            }
-            arr.length=arr.length-1;
-            count--;
-
-            break;
-          }
-          console.log(arr)
-          insertData();
-        }
-
-        function delete2Operation(){
-          console.log(count);
-          for(var i=0;i<arr.length;i++){
-            if(arr[i][0]==count){
+            if(arr[i][0]==serialno){
               arr[i]=arr[i+1];
             }
             arr.length=arr.length-1;
             count--;
             break;
           }
-          console.log(arr);
-          insertData();
-          
-        }
-        function editOperation(){
-          var index=parseInt(prompt('Enter the sr-no:'))-1;
-          var arrindex=parseInt(prompt('1-email , 2- age, 3- gender'));
-          var newvalue=prompt("Enter the new-value");
-          console.log(index,arrindex,newvalue)
-          arr[index][arrindex]=newvalue;
-          console.log(arr);
           insertData();
         }
-        // function edit2Operation(){
-        //   console.log(count)
-        //   // var index=count-1;
-        //   var displayitem=[]
-        //   for(var i=0;i<arr.length;i++){
-        //     if(arr[i][0]==count){
-        //       displayitem=arr[i];
-              
-        //     }
-        //   }
-          // console.log(displayitem)
-          // document.getElementById("eid").value=displayitem[1];
-          // document.getElementById("user-age").value=displayitem[2];
-          
-          // console.log(displayitem)
-          // console.log(displayitem)
-          // var arrindex=parseInt(prompt('1-email , 2- age, 3- gender'));
-          // var newvalue=prompt("Enter the new-value");
-          // console.log(index,arrindex,newvalue)
-          // arr[index][arrindex]=newvalue;
-          // console.log(arr);
-          // insertData();
-        
+        function editOperation(srCount){
+          var email,age,gender;
+          for(var i=0;i<arr.length;i++){
+            if(arr[i][0]==srCount){
+              email=arr[i][1];
+              age=arr[i][2];
+              gender=arr[i][3];
+            }
+          }
+          document.getElementById('sr-no').value=srCount
+          document.getElementById("modalemail").value=email;
+          document.getElementById("modalage").value=age;
+          document.getElementById("modalgender").value=gender;
+        }
+        function editArray(){
+            var srno=parseInt(document.getElementById("sr-no").value);
+            var emailid = document.getElementById("modalemail").value;
+            var age = document.getElementById("modalage").value;
+            var gender = document.getElementById("modalgender").value;
+
+            for(var i=0;i<arr.length;i++){
+              if(arr[i][0]==srno){
+                arr[i][1]=emailid;
+                arr[i][2]=age;
+                arr[i][3]=gender;
+              }
+            }
+            insertData();
+            alert("Changes done successfully")
+        }
     </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js" defer="defer"></script>    
