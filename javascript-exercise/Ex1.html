@@ -110,10 +110,9 @@
         })()
 
         var arr=[];
-        var count=1;
+        var count=0;
         var data=[]
         function arrayOperation(){
-          
             var email=document.getElementById("eid").value;
             var age=document.getElementById("user-age").value;
             var radioGroup = document.getElementsByName("gender");
@@ -124,11 +123,7 @@
                     break;
                 }
             }
-            for(var i=0;i<data.length;i++){
-              count++;
-              break;
-            }
-            
+            count++;
             var dlt='<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="editOperation('+count+')">Edit</button>'+
             '<button class="btn btn-primary ml-2" onclick="deleteOperation('+count+')">Delete</button>';
             data=[count,email,age,selectedValue,dlt];
@@ -150,18 +145,22 @@
               });
             });
           } 
+        
         function deleteOperation(serialno){
-          console.log("line140: "+serialno);
+          var removedarray=[];
+          var cnt2=1;
           for(var i=0;i<arr.length;i++){
-            if(arr[i][0]==serialno){
-              arr[i]=arr[i+1];
-            }
-            arr.length=arr.length-1;
-            count--;
-            break;
+            if(arr[i][0]!=serialno){
+              arr[i][0]=cnt2;
+              removedarray[removedarray.length]=arr[i];
+              cnt2++;
+            } 
           }
+          arr=removedarray;
+          count--;        
           insertData();
         }
+
         function editOperation(srCount){
           var email,age,gender;
           for(var i=0;i<arr.length;i++){
