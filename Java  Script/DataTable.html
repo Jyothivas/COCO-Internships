@@ -135,7 +135,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="updateEmployee()">Submit</button>
+              <button type="button" class="btn btn-primary" onclick="editOperation()">Submit</button>
             </div>
           </div>
         </div>
@@ -181,41 +181,39 @@ var Email;
 var Age;
 var Radio;
 var Gender;
+var editIndex; 
 
-function myfunc()
-{
-    Edit = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-index="' + (Table.length - 1) + '">Edit</button>' +
-         '<button type="button" id="Delbtn" class="btn btn-danger" onclick="deleteOperation()">Delete</button>';
+function myfunc() {
+  Edit =
+    '<button type="button" class="btn btn-primary" onclick="updateTable(' +
+    (Table.length - 1) +
+    ')">Edit</button>' +
+    '<button type="button" id="Delbtn" class="btn btn-danger" onclick="deleteOperation(' +
+    (Table.length - 1) +
+    ')">Delete</button>';
 
-    Email = document.getElementById("email").value;
-    Age = document.getElementById("age").value;
+  Email = document.getElementById("email").value;
+  Age = document.getElementById("age").value;
 
-    Radio = document.getElementsByName("gender");
-    Gender;
-    for(var i=0; i<Radio.length; i++)
-    {
-        if(Radio[i].checked)
-        {
-            Gender = Radio[i].value;
-            break;
-        }
+  Radio = document.getElementsByName("gender");
+  Gender;
+  for (var i = 0; i < Radio.length; i++) {
+    if (Radio[i].checked) {
+      Gender = Radio[i].value;
+      break;
     }
+  }
 
-    // To Increament Sr.NO
-     for(i=0;i<Data.length; i++)
-     {
-        sr++;
-        break;
-     }
-    
-    
-    Data = [sr,Email,Age,Gender,Edit];
-      
+  Data = [sr, Email, Age, Gender, Edit];
 
-    Table[Table.length]=Data;
-    console.log(Table);
+  Table[Table.length] = Data;
+  console.log(Table);
 
-    NewFunc();
+  sr++;
+
+  NewFunc();
+}
+
 function NewFunc()
 {
     $(document).ready(function() {
@@ -235,40 +233,71 @@ function NewFunc()
 
     
 }
-}
-
-function deleteOperation() {
-  var table = document.getElementById('example');
-  for (var i = 1; i < table.rows.length; i++) {
-    table.rows[i].cells[4].onclick = function() {
-      var index = this.parentElement.rowIndex;
-      table.deleteRow(index);
-      // Update the Sr.No
-      for (var j = 1; j < table.rows.length; j++) {
-        table.rows[j].cells[0].innerHTML = j;
-      }
-    };
-  }
-}
 
 
-function updateEmployee() 
+
+function deleteOperation(rowIndex) 
 {
-  var index = document.getElementById('exampleModal').querySelector('.btn-primary').getAttribute('data-index');
-  var rowData = Table[index];
+  var newTable = [];
+  var newSr = 1;
+  for (var i = 0; i < Table.length; i++) {
+    if (i !== rowIndex) {
+      Table[i][0] = newSr;
+      newTable[newTable.length] = Table[i];
+      newSr++;
+    }
+  }
+  Table = newTable;
+  sr--;
+  console.log("Updated Table");
+  console.log(Table); 
 
-  // Update the data with the values from the modal form fields
-  rowData[1] = document.getElementById('modalemail').value;
-  rowData[2] = document.getElementById('modalage').value;
-  rowData[3] = document.getElementById('modalgender').value;
-
-  // Update the table with the modified data
-  var table = $('#example').DataTable();
-  table.row(index).data(rowData).draw();
-
-  // Close the modal dialog
-  $('#exampleModal').modal('hide');
+  $('#example').DataTable().clear().rows.add(Table).draw(); 
 }
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+function updateTable(index) //Onclick Edit
+  {
+    editIndex = index;
+
+    var email = Table[index][1];
+    var age = Table[index][2];
+    var gender = Table[index][3];
+
+    document.getElementById("modalemail").value = email;
+    document.getElementById("modalage").value = age;
+    document.getElementById("modalgender").value = gender;
+
+    
+    $('#exampleModal').modal('show');
+  }
+
+  function editOperation() //Onclick modal submit
+  {
+    var modalEmail = document.getElementById("modalemail").value;
+    var modalAge = document.getElementById("modalage").value;
+    var modalGender = document.getElementById("modalgender").value;
+
+    
+    Table[editIndex][1] = modalEmail;
+    Table[editIndex][2] = modalAge;
+    Table[editIndex][3] = modalGender;
+
+    console.log("Updated array");
+    console.log(Table);
+   
+    $('#example').DataTable().clear().rows.add(Table).draw();
+
+    
+    $('#exampleModal').modal('hide');
+  }
 
 
 function clearForm() 
