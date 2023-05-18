@@ -118,7 +118,10 @@
           <div class="modal-content">
             <div class="modal-body">
               <form >
-                
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Sr-no:</label>
+                  <input type="hidden" class="form-control" name="Srno" id="modalSr">
+                </div> 
                 <div class="form-group">
                   <label for="recipient-name" class="col-form-label">Email-ID:</label>
                   <input type="email" class="form-control" name="useremail" id="modalemail">
@@ -186,10 +189,10 @@ var editIndex;
 function myfunc() {
   Edit =
     '<button type="button" class="btn btn-primary" onclick="updateTable(' +
-    (Table.length - 1) +
+    (sr) +
     ')">Edit</button>' +
     '<button type="button" id="Delbtn" class="btn btn-danger" onclick="deleteOperation(' +
-    (Table.length - 1) +
+    (sr) +
     ')">Delete</button>';
 
   Email = document.getElementById("email").value;
@@ -235,22 +238,25 @@ function NewFunc()
 }
 
 
-
-function deleteOperation(rowIndex) 
+var srno=sr;
+function deleteOperation(srno) 
 {
-  var newTable = [];
-  var newSr = 1;
-  for (var i = 0; i < Table.length; i++) {
-    if (i !== rowIndex) {
-      Table[i][0] = newSr;
-      newTable[newTable.length] = Table[i];
+  var newTable=[];
+  var newSr=1;
+  for(var i=0;i<Table.length;i++)
+  {
+    if(Table[i][0]!=srno)
+    {
+      Table[i][0]=newSr;
+      newTable[newTable.length]=Table[i];
       newSr++;
-    }
+    } 
   }
-  Table = newTable;
+  Table=newTable;
   sr--;
-  console.log("Updated Table");
-  console.log(Table); 
+
+  console.log("Update Table");
+  console.log(Table);
 
   $('#example').DataTable().clear().rows.add(Table).draw(); 
 }
@@ -263,32 +269,47 @@ function deleteOperation(rowIndex)
 
 
 
-function updateTable(index) //Onclick Edit
+function updateTable(sr) //Onclick Edit
   {
-    editIndex = index;
+    var email;
+    var age;
+    var gender;
 
-    var email = Table[index][1];
-    var age = Table[index][2];
-    var gender = Table[index][3];
+    for(var i=0;i<Table.length;i++)
+    {
+      if(Table[i][0]==sr)
+      {
+        email=Table[i][1];
+        age=Table[i][2];
+        gender=Table[i][3];
+      }
+    }
 
-    document.getElementById("modalemail").value = email;
-    document.getElementById("modalage").value = age;
-    document.getElementById("modalgender").value = gender;
-
+    
+    document.getElementById("modalSr").value=sr;
+    document.getElementById("modalemail").value=email;
+    document.getElementById("modalage").value=age;
+    document.getElementById("modalgender").value=gender;
     
     $('#exampleModal').modal('show');
   }
 
   function editOperation() //Onclick modal submit
   {
-    var modalEmail = document.getElementById("modalemail").value;
-    var modalAge = document.getElementById("modalage").value;
-    var modalGender = document.getElementById("modalgender").value;
+    var srno=parseInt(document.getElementById("modalSr").value);
+    var email = document.getElementById("modalemail").value;
+    var age = document.getElementById("modalage").value;
+    var gender = document.getElementById("modalgender").value;
 
-    
-    Table[editIndex][1] = modalEmail;
-    Table[editIndex][2] = modalAge;
-    Table[editIndex][3] = modalGender;
+    for(var i=0;i<Table.length;i++)
+    {
+      if(Table[i][0]==srno)
+      {
+        Table[i][1]=email;
+        Table[i][2]=age;
+        Table[i][3]=gender;
+      }
+    }
 
     console.log("Updated array");
     console.log(Table);
@@ -297,6 +318,9 @@ function updateTable(index) //Onclick Edit
 
     
     $('#exampleModal').modal('hide');
+    document.getElementById("modalemail").value = "";
+    document.getElementById("modalage").value = "";
+    document.getElementById("modalgender").value = "";
   }
 
 
