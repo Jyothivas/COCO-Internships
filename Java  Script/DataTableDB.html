@@ -49,10 +49,10 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-10">
-                <form action="" class="needs-validation"  novalidate onsubmit="return false;">
+                <form id="employeeForm" class="needs-validation"  novalidate onsubmit="return false;">
                     <div class="row">
                         <div class="col-xl-6 input area">
-                        <input type="email" name="" id="email" class="form-control" placeholder="Email"required>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email"required>
                         <div class="invalid-feedback">
                             Please fill out this field
                         </div><br>
@@ -60,7 +60,7 @@
                  </div>
                         <div class="row">
                             <div class="col-xl-6 input area">
-                            <input type="number" name="" id="age" class="form-control" placeholder="Age"required>
+                            <input type="number" name="age" id="age" class="form-control" placeholder="Age"required>
                             <div class="invalid-feedback">
                                 Please fill out this field
                             </div>
@@ -88,7 +88,7 @@
                         <div class="row">
                             <div class="col-xl-6 input area">
                             
-                                <button type="submit" value="Submit" class="btn btn-primary" onclick="myfunc()">
+                                <button type="submit" value="Submit" class="btn btn-primary" onclick="submitForm()">
                                     Submit
                                 </button>
 
@@ -147,13 +147,17 @@
 
 
 
+
+      <div id="employeeData"></div>
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
-    <script>
 
-
- 
-         
+<script>
+        
 (() => {
   'use strict'
 
@@ -173,164 +177,62 @@
   })
 })()
 
-/////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-var Data=[];
-var Table=[];
 var sr=1;
-var Edit;
-var Email;
-var Age;
-var Radio;
-var Gender;
-var editIndex; 
 
-function myfunc() {
-  Edit =
-    '<button type="button" class="btn btn-primary" onclick="updateTable(' +
-    (sr) +
-    ')">Edit</button>' +
-    '<button type="button" id="Delbtn" class="btn btn-danger" onclick="deleteOperation(' +
-    (sr) +
-    ')">Delete</button>';
+function submitForm() {
+  const email = document.getElementById('email').value;
+  const age = document.getElementById('age').value;
+  const gender = document.querySelector('input[name="gender"]:checked').value;
 
-  Email = document.getElementById("email").value;
-  Age = document.getElementById("age").value;
+  const formData = new FormData();
+  formData.append('sr',sr);
+  formData.append('email', email);
+  formData.append('age', age);
+  formData.append('gender', gender);
 
-  Radio = document.getElementsByName("gender");
-  Gender;
-  for (var i = 0; i < Radio.length; i++) {
-    if (Radio[i].checked) {
-      Gender = Radio[i].value;
-      break;
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'DataTableDB.php', true);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      document.getElementById('employeeData').innerHTML = xhr.responseText;
     }
-  }
-
-  Data = [sr, Email, Age, Gender, Edit];
-
-  Table[Table.length] = Data;
-  console.log(Table);
-
+  };
+  xhr.send(formData);
   sr++;
-
-  NewFunc();
 }
 
-function NewFunc()
-{
-    $(document).ready(function() {
+
+$(document).ready(function() {
             $('#example').DataTable({
-                bDestroy: true,
-                data: Table,
-                columns: 
-                [
-                { title: "Sr.No"},
-                { title: "Email-ID"},
-                { title: "Age"},
-                { title: "Gender"},
-                { title: "ACTION"}
+                "ajax": "DataTableDB.php",
+                "columns": [
+                    { "data": "sr" },
+                    { "data": "email" },
+                    { "data": "age" },
+                    { "data": "gender" },
+                  
                 ]
+            });
         });
-    });
-
-    
-}
-
-
-var srno=sr;
-function deleteOperation(srno) 
-{
-  var newTable=[];
-  var newSr=1;
-  for(var i=0;i<Table.length;i++)
-  {
-    if(Table[i][0]!=srno)
-    {
-      Table[i][0]=newSr;
-      newTable[newTable.length]=Table[i];
-      newSr++;
-    } 
-  }
-  Table=newTable;
-  sr--;
-
-  console.log("Update Table");
-  console.log(Table);
-
-  $('#example').DataTable().clear().rows.add(Table).draw(); 
-}
 
 
 
 
-////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
-function updateTable(sr) //Onclick Edit
-  {
-    var email;
-    var age;
-    var gender;
-
-    for(var i=0;i<Table.length;i++)
-    {
-      if(Table[i][0]==sr)
-      {
-        email=Table[i][1];
-        age=Table[i][2];
-        gender=Table[i][3];
-      }
-    }
-
-    
-    document.getElementById("modalSr").value=sr;
-    document.getElementById("modalemail").value=email;
-    document.getElementById("modalage").value=age;
-    document.getElementById("modalgender").value=gender;
-    
-    $('#exampleModal').modal('show');
-  }
-
-  function editOperation() //Onclick modal submit
-  {
-    var srno=parseInt(document.getElementById("modalSr").value);
-    var email = document.getElementById("modalemail").value;
-    var age = document.getElementById("modalage").value;
-    var gender = document.getElementById("modalgender").value;
-
-    for(var i=0;i<Table.length;i++)
-    {
-      if(Table[i][0]==srno)
-      {
-        Table[i][1]=email;
-        Table[i][2]=age;
-        Table[i][3]=gender;
-      }
-    }
-
-    console.log("Updated array");
-    console.log(Table);
-   
-    $('#example').DataTable().clear().rows.add(Table).draw();
-
-    n
-    $('#exampleModal').modal('hide');
-    document.getElementById("modalemail").value = "";
-    document.getElementById("modalage").value = "";
-    document.getElementById("modalgender").value = "";
-  }
 
 
-function clearForm() 
-{
-    document.getElementById("email").value = "";
-    document.getElementById("age").value = "";
-    document.getElementById("mf1").checked = false;
-    document.getElementById("mf2").checked = false;
-}
+
+
+
+
+
+
 
 
 
