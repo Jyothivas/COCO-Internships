@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Edit Delete with database</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+  <body>
+    <div class="container m-5">
+        <h1>New Employee</h1>
+        <form class="requires-validation" id="myForm" onsubmit="return false" novalidate>
+            <div class="row">
+                <div class="col-sm-6 mt-4">
+                    <input type="email" class="form-control" id="eid" name="email" placeholder="Enter email" required>
+                    <div class="invalid-feedback">
+                        Please fill out this field.
+                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 mt-2">
+                    <input type="number" class="form-control" id="user-age" name="age" placeholder="Enter age" required>
+                    <div class="invalid-feedback">
+                        Please fill out this field.
+                     </div>
+                </div>
+            </div>
+            <div class="form-check row mt-3">
+                <div class="col-sm-10" >
+                    <input class="form-check-input" type="radio" name="gender" value="male" id="mf1" required>
+                    <label class="form-check-label" for="gender">
+                        Male
+                    </label>
+                    <div class="invalid-feedback">
+                        Please select any option.
+                     </div>
+                    <input class="form-check-input ml-4" type="radio" name="gender" value="female" id="mf2" required>
+                    <label class="form-check-label ml-5" for="gender">
+                        Female
+                    </label>
+                    <div class="invalid-feedback">
+                        Please select any option.
+                     </div>
+                </div>
+                <button class="btn btn-primary mt-5" type="submit" onclick="submitData()">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div id="op">
+    </div>
+    <table id="myTable" class="table table-bordered data-table" >
+        <thead>
+          <tr>
+            <th>Sr.No</th>
+            <th>Email-ID</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    <script>
+        (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.requires-validation')
+        Array.from(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+              form.classList.add('was-validated')
+            }, false)
+          })
+        })()
+        var arr=[]
+        function submitData(){
+            var email=document.getElementById("eid").value;
+            var age=document.getElementById("user-age").value;
+            var radioGroup = document.getElementsByName("gender");
+            var selectedValue;
+            for (var i = 0; i < radioGroup.length; i++) {
+                if (radioGroup[i].checked) {
+                    selectedValue = radioGroup[i].value;
+                    break;
+                }
+            }
+            var data=[email,age,selectedValue];
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function() 
+            {
+                if (this.readyState == 4 && this.status == 200) 
+                {
+                    var array = JSON.parse(this.responseText);
+                    arr= array.map(Object.values);
+                    
+                    insertData(arr);
+                }
+            };
+            xmlhttp.open("GET","backend.php?data="+data,true);
+            xmlhttp.send();
+        }
+        function insertData(arr){
+            var btn='<button type="button" class="btn btn-primary" ">Edit</button>'+
+            '<button class="btn btn-primary ml-2" >Delete</button>';
+            for (var i = 0; i < arr.length; i++) {
+                var currentArray = arr[i];
+                currentArray.push(btn);
+            }
+          $(document).ready(function () {
+        var table= $('#myTable').DataTable({
+                bDestroy: true,
+                data:arr,
+                columns: [
+                  {title: "Sr-No"},
+                { title: "Email" },
+                { title: "Age" },
+                { title: "Gender" },
+                { title: "Action" },
+                ]
+              });
+            });
+          } 
+</script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js" defer="defer"></script>    
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html> 
